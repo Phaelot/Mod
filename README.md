@@ -1,7 +1,7 @@
 # Mod
 A mod/patch for Sovereignty: Crown of Kings game. 
 
-Compiled patch can be downloaded from releases tab or you can compile library from source youself. VS 2017 was used. Compile with Release/x86.
+Compiled patch can be downloaded from releases tab or you can compile library from source youself. VS 2017 was used with .NET Framework 4.5. Compile with Release/x86.
 
 Original decompiled game library code source is in "Original Library" folder.
 
