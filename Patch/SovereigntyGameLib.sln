@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.36217.24
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SovereigntyGameLib", "SovereigntyGameLib\SovereigntyGameLib.csproj", "{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{52F65221-046E-4510-AC72-1F71C0BDED0E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Debug|Any CPU.ActiveCfg = Release|x86
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Debug|Any CPU.Build.0 = Release|x86
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Debug|x86.ActiveCfg = Debug|x86
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Debug|x86.Build.0 = Debug|x86
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Release|x86.ActiveCfg = Release|x86
+		{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {319D28B5-C6C2-4A3A-8B82-F3188A6480A1}
+	EndGlobalSection
+EndGlobal

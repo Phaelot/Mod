@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6D19BF80-EE0B-41CE-9C5F-80369C5A5A1C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SovereigntyTK</RootNamespace>
+    <AssemblyName>SovereigntyGameLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>lib\OpenTK.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SharpFont">
+      <HintPath>lib\SharpFont.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="NVorbis">
+      <HintPath>lib\NVorbis.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="gstreamer-sharp-net4">
+      <HintPath>lib\gstreamer-sharp-net4.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Steamworks.NET">
+      <HintPath>lib\Steamworks.NET.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="Triangle">
+      <HintPath>lib\Triangle.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Game\StackAnomalyLogger.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\ALHelper.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\ILogger.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\LogEvent.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\LogEventBoolean.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\LogEventSingle.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\LoggerBase.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\NullLogger.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\OggStream.cs" />
+    <Compile Include="NVorbis\OpenTKSupport\OggStreamer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AchievementManager.cs" />
+    <Compile Include="AI\AIAction.cs" />
+    <Compile Include="AI\AIActionTypes.cs" />
+    <Compile Include="AI\AIBattleManager.cs" />
+    <Compile Include="AI\AIFormationManager.cs" />
+    <Compile Include="AI\AIMagicManager.cs" />
+    <Compile Include="AI\AIPlayer.cs" />
+    <Compile Include="AI\AIPrisonManager.cs" />
+    <Compile Include="AI\AIProvinceManager.cs" />
+    <Compile Include="AI\AIResourceManager.cs" />
+    <Compile Include="AI\AITacticalUtilities.cs" />
+    <Compile Include="AI\AITradeResponses.cs" />
+    <Compile Include="AI\AITradeUtilities.cs" />
+    <Compile Include="AI\AITreatyManager.cs" />
+    <Compile Include="AI\AIUnitManager.cs" />
+    <Compile Include="AI\AIUtilities.cs" />
+    <Compile Include="AI\Facings.cs" />
+    <Compile Include="AI\MarketTradeData.cs" />
+    <Compile Include="AI\NodeUnitData.cs" />
+    <Compile Include="AI\SpellCastingData.cs" />
+    <Compile Include="AI\TacticalActionTypes.cs" />
+    <Compile Include="AI\TacticalAIAction.cs" />
+    <Compile Include="AI\TacticalAIPlayer.cs" />
+    <Compile Include="AI\TacticalStates.cs" />
+    <Compile Include="AI\UnitMoveData.cs" />
+    <Compile Include="AI\V2\Actions\AIActionAttack.cs" />
+    <Compile Include="AI\V2\Actions\AIActionCastSpell.cs" />
+    <Compile Include="AI\V2\Actions\AIActionConstructBuilding.cs" />
+    <Compile Include="AI\V2\Actions\AIACtionCreateRebelStack.cs" />
+    <Compile Include="AI\V2\Actions\AIActionDeclareWar.cs" />
+    <Compile Include="AI\V2\Actions\AIActionDeployUnits.cs" />
+    <Compile Include="AI\V2\Actions\AIActionEndTreaties.cs" />
+    <Compile Include="AI\V2\Actions\AIActionEndTurn.cs" />
+    <Compile Include="AI\V2\Actions\AIActionEnslavePrisoners.cs" />
+    <Compile Include="AI\V2\Actions\AIActionExecutePrisoners.cs" />
+    <Compile Include="AI\V2\Actions\AIActionIntercept.cs" />
+    <Compile Include="AI\V2\Actions\AIActionLearnSpell.cs" />
+    <Compile Include="AI\V2\Actions\AIActionMarketTrade.cs" />
+    <Compile Include="AI\V2\Actions\AIActionMoveUnits.cs" />
+    <Compile Include="AI\V2\Actions\AIActionOfferTrade.cs" />
+    <Compile Include="AI\V2\Actions\AIActionPurchaseUnits.cs" />
+    <Compile Include="AI\V2\Actions\AIActionRaisePrisoners.cs" />
+    <Compile Include="AI\V2\Actions\AIActionRebelOccupy.cs" />
+    <Compile Include="AI\V2\Actions\AIActionRecruitPrisoners.cs" />
+    <Compile Include="AI\V2\Actions\AIActionReleasePrisoners.cs" />
+    <Compile Include="AI\V2\Actions\AIActionSacrificePrisoners.cs" />
+    <Compile Include="AI\V2\Actions\AITacAction.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionEndTurn.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionFight.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionHeal.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionMove.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionPackUnit.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionPlayCard.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionRetreat.cs" />
+    <Compile Include="AI\V2\Actions\AITacActionUnackUnit.cs" />
+    <Compile Include="AI\V2\AIAction.cs" />
+    <Compile Include="AI\V2\AIActionManager.cs" />
+    <Compile Include="AI\V2\AiActionStates.cs" />
+    <Compile Include="AI\V2\AIBudgetManager.cs" />
+    <Compile Include="AI\V2\AIConstructionManager.cs" />
+    <Compile Include="AI\V2\AIEspionageManager.cs" />
+    <Compile Include="AI\V2\AIFundData.cs" />
+    <Compile Include="AI\V2\AIMagicManager.cs" />
+    <Compile Include="AI\V2\AIPlayer.cs" />
+    <Compile Include="AI\V2\AIPrisonManager.cs" />
+    <Compile Include="AI\V2\AIRelationsManager.cs" />
+    <Compile Include="AI\V2\AIResourcesManager.cs" />
+    <Compile Include="AI\V2\AIRevoltManager.cs" />
+    <Compile Include="AI\V2\AITacticalManager.cs" />
+    <Compile Include="AI\V2\AITradeManager.cs" />
+    <Compile Include="AI\V2\AITradeResponses.cs" />
+    <Compile Include="AI\V2\AIUnitsManager.cs" />
+    <Compile Include="AI\V2\AIUtilities.cs" />
+    <Compile Include="AI\V2\AIWarManager.cs" />
+    <Compile Include="AI\V2\Armies\ArmiesManager.cs" />
+    <Compile Include="AI\V2\Armies\ArmyManager.cs" />
+    <Compile Include="AI\V2\CovertMissionData.cs" />
+    <Compile Include="AI\V2\CovertMissionTypes.cs" />
+    <Compile Include="AI\V2\InvasionTargetData.cs" />
+    <Compile Include="AI\V2\RealmWarStatus.cs" />
+    <Compile Include="AI\V2\Scripts\AIPersonality.cs" />
+    <Compile Include="AI\V2\WarData.cs" />
+    <Compile Include="AI\V2\WarGoalData.cs" />
+    <Compile Include="AI\V2\WarGoalTypes.cs" />
+    <Compile Include="AI\V2\WarReasonData.cs" />
+    <Compile Include="AI\V2\WarReasons.cs" />
+    <Compile Include="AI\WarData.cs" />
+    <Compile Include="CategorisedListItem.cs" />
+    <Compile Include="Data\PolygonData.cs" />
+    <Compile Include="Data\PolyPointData.cs" />
+    <Compile Include="Data\ProvincePolygonData.cs" />
+    <Compile Include="DebugOutputWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugOutputWindow.Designer.cs">
+      <DependentUpon>DebugOutputWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorDialog.Designer.cs">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameBase.cs" />
+    <Compile Include="Game\ActionMessageDataTracker.cs" />
+    <Compile Include="Game\ActiveGameData\ActiveNodeConnection.cs" />
+    <Compile Include="Game\ActiveGameData\ActivePathNode.cs" />
+    <Compile Include="Game\ActiveGameData\ActiveStat.cs" />
+    <Compile Include="Game\ActiveGameData\AgentModes.cs" />
+    <Compile Include="Game\ActiveGameData\AgentStatDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\ArtScienceTypes.cs" />
+    <Compile Include="Game\ActiveGameData\BattleFieldData.cs" />
+    <Compile Include="Game\ActiveGameData\BorderStateDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\BorderStates.cs" />
+    <Compile Include="Game\ActiveGameData\BuildingEffect.cs" />
+    <Compile Include="Game\ActiveGameData\CardEffect.cs" />
+    <Compile Include="Game\ActiveGameData\CardTargetData.cs" />
+    <Compile Include="Game\ActiveGameData\CardTargetTypes.cs" />
+    <Compile Include="Game\ActiveGameData\CastTimes.cs" />
+    <Compile Include="Game\ActiveGameData\ConstructionStates.cs" />
+    <Compile Include="Game\ActiveGameData\DiplomaticCondition.cs" />
+    <Compile Include="Game\ActiveGameData\DiplomaticEvent.cs" />
+    <Compile Include="Game\ActiveGameData\FloatRealmStat.cs" />
+    <Compile Include="Game\ActiveGameData\GameRegion.cs" />
+    <Compile Include="Game\ActiveGameData\GenericStatModifierDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\LinkData.cs" />
+    <Compile Include="Game\ActiveGameData\MoveTypes.cs" />
+    <Compile Include="Game\ActiveGameData\OngoingTrade.cs" />
+    <Compile Include="Game\ActiveGameData\PowerGroup.cs" />
+    <Compile Include="Game\ActiveGameData\PowerStatus.cs" />
+    <Compile Include="Game\ActiveGameData\PrisonActions.cs" />
+    <Compile Include="Game\ActiveGameData\PrisonData.cs" />
+    <Compile Include="Game\ActiveGameData\ProvinceHistoryData.cs" />
+    <Compile Include="Game\ActiveGameData\ProvinceStat.cs" />
+    <Compile Include="Game\ActiveGameData\ProvinceStatModifierDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\ProvinceStatModifierListDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\ProvincestatusDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\ProvinceValueDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\RealmBattleData.cs" />
+    <Compile Include="Game\ActiveGameData\RealmCostModifier.cs" />
+    <Compile Include="Game\ActiveGameData\RealmDiplomacyManager.cs" />
+    <Compile Include="Game\ActiveGameData\RealmDisposition.cs" />
+    <Compile Include="Game\ActiveGameData\RealmFloatStatModifierDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\RealmMagic.cs" />
+    <Compile Include="Game\ActiveGameData\RealmPowerManager.cs" />
+    <Compile Include="Game\ActiveGameData\RealmRestrictions.cs" />
+    <Compile Include="Game\ActiveGameData\RealmSpell.cs" />
+    <Compile Include="Game\ActiveGameData\RealmStat.cs" />
+    <Compile Include="Game\ActiveGameData\RealmStatModifierDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\RealmstatusDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\RealmTradeManager.cs" />
+    <Compile Include="Game\ActiveGameData\RealmWarTracker.cs" />
+    <Compile Include="Game\ActiveGameData\SlidingCounter.cs" />
+    <Compile Include="Game\ActiveGameData\SpellDataDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\SpellEffect.cs" />
+    <Compile Include="Game\ActiveGameData\SpellRechargeDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\SpellTargetData.cs" />
+    <Compile Include="Game\ActiveGameData\StackStatModifierData.cs" />
+    <Compile Include="Game\ActiveGameData\StatChanged.cs" />
+    <Compile Include="Game\ActiveGameData\StatEffectDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\StatModifierDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\StatTypes.cs" />
+    <Compile Include="Game\ActiveGameData\UnitBattleData.cs" />
+    <Compile Include="Game\ActiveGameData\UnitBoolDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitCombatNotifyDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitDamagedDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitDamageDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitDamageTypeDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitFlag.cs" />
+    <Compile Include="Game\ActiveGameData\UnitIntDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitMoveCostDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitMovePathDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitMoveTypeDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitPurchaseManager.cs" />
+    <Compile Include="Game\ActiveGameData\UnitQueueItem.cs" />
+    <Compile Include="Game\ActiveGameData\UnitRegionDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitStackDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitStat.cs" />
+    <Compile Include="Game\ActiveGameData\UnitStatNames.cs" />
+    <Compile Include="Game\ActiveGameData\UnitstatusDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\UnitTrainStates.cs" />
+    <Compile Include="Game\ActiveGameData\UnitValueDelegate.cs" />
+    <Compile Include="Game\ActiveGameData\WarTrackingData.cs" />
+    <Compile Include="Game\ActiveGameData\WorkingAgent.cs" />
+    <Compile Include="Game\ActiveGameData\WorkingHero.cs" />
+    <Compile Include="Game\ActiveGameData\WorkingProvince.cs" />
+    <Compile Include="Game\ActiveGameData\WorkingRealm.cs" />
+    <Compile Include="Game\ActiveGameData\WorkingStack.cs" />
+    <Compile Include="Game\ActiveGameData\WorkingUnit.cs" />
+    <Compile Include="Game\ActiveGameData\WorkingZone.cs" />
+    <Compile Include="Game\RealmTurnStatusLogger.cs" />
+    <Compile Include="Game\AllianceController.cs" />
+    <Compile Include="Game\Battle\AutoBattleController.cs" />
+    <Compile Include="Game\Battle\BattleCleaner.cs" />
+    <Compile Include="Game\Battle\BattleCleanupData.cs" />
+    <Compile Include="Game\Battle\BattleData.cs" />
+    <Compile Include="Game\Battle\BattleModDelegate.cs" />
+    <Compile Include="Game\Battle\BattleStarter.cs" />
+    <Compile Include="Game\Battle\BattleTurnController.cs" />
+    <Compile Include="Game\Battle\CombatAction.cs" />
+    <Compile Include="Game\Battle\CombatManager.cs" />
+    <Compile Include="Game\Battle\CombatPreviewResult.cs" />
+    <Compile Include="Game\Battle\CombatResults.cs" />
+    <Compile Include="Game\Battle\CombatType.cs" />
+    <Compile Include="Game\Battle\MouseButtonDelegate.cs" />
+    <Compile Include="Game\Battle\PreviewResultData.cs" />
+    <Compile Include="Game\Battle\TacticalActionManager.cs" />
+    <Compile Include="Game\Battle\TacticalActionType.cs" />
+    <Compile Include="Game\Battle\TacticalBattleController.cs" />
+    <Compile Include="Game\Battle\TacticalCombatAction.cs" />
+    <Compile Include="Game\Battle\TileClickDelegate.cs" />
+    <Compile Include="Game\Battle\UnitActionData.cs" />
+    <Compile Include="Game\Battle\UnitClickDelegate.cs" />
+    <Compile Include="Game\Battle\UnitDelegate.cs" />
+    <Compile Include="Game\Battle\VPData.cs" />
+    <Compile Include="Game\BooleanSetting.cs" />
+    <Compile Include="Game\Campaign\CampaignBase.cs" />
+    <Compile Include="Game\Campaign\CampaignPlugin.cs" />
+    <Compile Include="Game\Campaign\MessageCloseType.cs" />
+    <Compile Include="Game\Campaign\Objective.cs" />
+    <Compile Include="Game\Campaign\ObjectiveActionDelegate.cs" />
+    <Compile Include="Game\Campaign\ObjectiveBoolean.cs" />
+    <Compile Include="Game\Campaign\ObjectiveBooleanDelegate.cs" />
+    <Compile Include="Game\Campaign\ObjectiveCounter.cs" />
+    <Compile Include="Game\Campaign\ObjectiveCounterDelegate.cs" />
+    <Compile Include="Game\Campaign\ObjectiveDelegate.cs" />
+    <Compile Include="Game\Campaign\ObjectiveFailable.cs" />
+    <Compile Include="Game\Campaign\ObjectiveFloatCounter.cs" />
+    <Compile Include="Game\Campaign\ObjectiveFloatCounterDelegate.cs" />
+    <Compile Include="Game\Campaign\ObjectiveGroupOr.cs" />
+    <Compile Include="Game\Campaign\ObjectiveState.cs" />
+    <Compile Include="Game\Campaign\ObjectiveStatuses.cs" />
+    <Compile Include="Game\Campaign\Results.cs" />
+    <Compile Include="Game\Data\AITraitData.cs" />
+    <Compile Include="Game\Data\AITraits.cs" />
+    <Compile Include="Game\Data\AlignmentConverter.cs" />
+    <Compile Include="Game\Data\AnimationData.cs" />
+    <Compile Include="Game\Data\BaseData.cs" />
+    <Compile Include="Game\Data\BuildingAffinityData.cs" />
+    <Compile Include="Game\Data\BuildingData.cs" />
+    <Compile Include="Game\Data\ClassConverter.cs" />
+    <Compile Include="Game\Data\CombatFeatureData.cs" />
+    <Compile Include="Game\Data\CombatMapData.cs" />
+    <Compile Include="Game\Data\CombatRoadData.cs" />
+    <Compile Include="Game\Data\CombatTerrainData.cs" />
+    <Compile Include="Game\Data\ConnectionTypes.cs" />
+    <Compile Include="Game\Data\CoordConverter.cs" />
+    <Compile Include="Game\Data\DamageTypeConverter.cs" />
+    <Compile Include="Game\Data\DamageTypes.cs" />
+    <Compile Include="Game\Data\DataBindingAttribute.cs" />
+    <Compile Include="Game\Data\DataConverterAttribute.cs" />
+    <Compile Include="Game\Data\DataConverters.cs" />
+    <Compile Include="Game\Data\DataFieldInfo.cs" />
+    <Compile Include="Game\Data\DataNameAttribute.cs" />
+    <Compile Include="Game\Data\DeployZone.cs" />
+    <Compile Include="Game\Data\DiplomacyOffsetData.cs" />
+    <Compile Include="Game\Data\DiplomaticConditionData.cs" />
+    <Compile Include="Game\Data\DiplomaticEventData.cs" />
+    <Compile Include="Game\Data\DiplomaticStackModes.cs" />
+    <Compile Include="Game\Data\EditorDataAttribute.cs" />
+    <Compile Include="Game\Data\EditorTypes.cs" />
+    <Compile Include="Game\Data\EntityType.cs" />
+    <Compile Include="Game\Data\EntityTypeConverter.cs" />
+    <Compile Include="Game\Data\FlagsDelegate.cs" />
+    <Compile Include="Game\Data\GameColorConverter.cs" />
+    <Compile Include="Game\Data\GameDataConverter.cs" />
+    <Compile Include="Game\Data\GeneralFloatConverter.cs" />
+    <Compile Include="Game\Data\GeneralIntConverter.cs" />
+    <Compile Include="Game\Data\GeneralStringConverter.cs" />
+    <Compile Include="Game\Data\HeroAbilityData.cs" />
+    <Compile Include="Game\Data\HeroClassData.cs" />
+    <Compile Include="Game\Data\HeroDeployTypeConverter.cs" />
+    <Compile Include="Game\Data\HeroDeployTypes.cs" />
+    <Compile Include="Game\Data\LustModData.cs" />
+    <Compile Include="Game\Data\MagicLevelData.cs" />
+    <Compile Include="Game\Data\MagicRealmConverter.cs" />
+    <Compile Include="Game\Data\MapLayers.cs" />
+    <Compile Include="Game\Data\MapTileData.cs" />
+    <Compile Include="Game\Data\NavalType.cs" />
+    <Compile Include="Game\Data\NavalTypeConverter.cs" />
+    <Compile Include="Game\Data\NewWorldData.cs" />
+    <Compile Include="Game\Data\NodeConnection.cs" />
+    <Compile Include="Game\Data\PathingNodeData.cs" />
+    <Compile Include="Game\Data\PathNodeTypes.cs" />
+    <Compile Include="Game\Data\PolygonSegment.cs" />
+    <Compile Include="Game\Data\PrimaryKeyAttribute.cs" />
+    <Compile Include="Game\Data\ProvinceData.cs" />
+    <Compile Include="Game\Data\ProvinceLink.cs" />
+    <Compile Include="Game\Data\ProvinceLinkConverter.cs" />
+    <Compile Include="Game\Data\ProvinceLinkTypes.cs" />
+    <Compile Include="Game\Data\ProvinceOutlineData.cs" />
+    <Compile Include="Game\Data\ProvinceTypeConverter.cs" />
+    <Compile Include="Game\Data\ProvinceTypes.cs" />
+    <Compile Include="Game\Data\RaceConverter.cs" />
+    <Compile Include="Game\Data\Races.cs" />
+    <Compile Include="Game\Data\RankConverter.cs" />
+    <Compile Include="Game\Data\RealmAlignments.cs" />
+    <Compile Include="Game\Data\RealmBulletData.cs" />
+    <Compile Include="Game\Data\RealmData.cs" />
+    <Compile Include="Game\Data\RealmMagicData.cs" />
+    <Compile Include="Game\Data\RealmSelectData.cs" />
+    <Compile Include="Game\Data\ResourceData.cs" />
+    <Compile Include="Game\Data\ResourceNameConverter.cs" />
+    <Compile Include="Game\Data\ResourceValueData.cs" />
+    <Compile Include="Game\Data\SeaZoneData.cs" />
+    <Compile Include="Game\Data\SharedUnitData.cs" />
+    <Compile Include="Game\Data\SovereigntyData.cs" />
+    <Compile Include="Game\Data\SpellDurationConverter.cs" />
+    <Compile Include="Game\Data\SpellOwnerData.cs" />
+    <Compile Include="Game\Data\SpellRangeConverter.cs" />
+    <Compile Include="Game\Data\SpellSchools.cs" />
+    <Compile Include="Game\Data\SpellTargets.cs" />
+    <Compile Include="Game\Data\SpellTypeConverter.cs" />
+    <Compile Include="Game\Data\SpellTypes.cs" />
+    <Compile Include="Game\Data\StackModeConverter.cs" />
+    <Compile Include="Game\Data\StringListConverter.cs" />
+    <Compile Include="Game\Data\TargetTypeConverter.cs" />
+    <Compile Include="Game\Data\TerrainData.cs" />
+    <Compile Include="Game\Data\TextIndexConverter.cs" />
+    <Compile Include="Game\Data\UnitClasses.cs" />
+    <Compile Include="Game\Data\UnitData.cs" />
+    <Compile Include="Game\Data\UnitRanks.cs" />
+    <Compile Include="Game\Data\UnitXPData.cs" />
+    <Compile Include="Game\Data\VertexPoint.cs" />
+    <Compile Include="Game\Data\WaterTypeConverter.cs" />
+    <Compile Include="Game\Data\WaterTypes.cs" />
+    <Compile Include="Game\Data\YesNoConverter.cs" />
+    <Compile Include="Game\DestinationChecker.cs" />
+    <Compile Include="Game\DisplayModeSetting.cs" />
+    <Compile Include="Game\EconomyController.cs" />
+    <Compile Include="Game\EnumeratedSetting.cs" />
+    <Compile Include="Game\InitialUnitPurchaser.cs" />
+    <Compile Include="Game\KeybindSetting.cs" />
+    <Compile Include="Game\MarketPlaceData.cs" />
+    <Compile Include="Game\MessageBoxData.cs" />
+    <Compile Include="Game\MessageBoxType.cs" />
+    <Compile Include="Game\MessageType.cs" />
+    <Compile Include="Game\NumberListSetting.cs" />
+    <Compile Include="Game\NumericSetting.cs" />
+    <Compile Include="Game\OldSettings.cs" />
+    <Compile Include="Game\OngoingTradeData.cs" />
+    <Compile Include="Game\Path.cs" />
+    <Compile Include="Game\PathManager.cs" />
+    <Compile Include="Game\PathPoint.cs" />
+    <Compile Include="Game\PlayerMovementController.cs" />
+    <Compile Include="Game\PrisonerController.cs" />
+    <Compile Include="Game\RankingCategories.cs" />
+    <Compile Include="Game\RelationStates.cs" />
+    <Compile Include="Game\RetreatData.cs" />
+    <Compile Include="Game\RetreatManager.cs" />
+    <Compile Include="Game\SaveData.cs" />
+    <Compile Include="Game\SaveManager.cs" />
+    <Compile Include="Game\ScoreManager.cs" />
+    <Compile Include="Game\SearchNode.cs" />
+    <Compile Include="Game\Setting.cs" />
+    <Compile Include="Game\Settings.cs" />
+    <Compile Include="Game\SovereigntyGame.cs" />
+    <Compile Include="Game\SovereigntyMapData.cs" />
+    <Compile Include="Game\SovereigntyStats.cs" />
+    <Compile Include="Game\StringListSetting.cs" />
+    <Compile Include="Game\Trackers\NodeUnitTracker.cs" />
+    <Compile Include="Game\Trackers\OwnedUnitTracker.cs" />
+    <Compile Include="Game\Trackers\ProvinceUnitTracker.cs" />
+    <Compile Include="Game\Trackers\RealmProvinceTracker.cs" />
+    <Compile Include="Game\Trackers\RealmUnitTracker.cs" />
+    <Compile Include="Game\Trackers\ZoneUnitTracker.cs" />
+    <Compile Include="Game\Trade\Tradecategories.cs" />
+    <Compile Include="Game\Trade\TradeItemData.cs" />
+    <Compile Include="Game\Trade\TradeListItem.cs" />
+    <Compile Include="Game\Trade\TradeOffer.cs" />
+    <Compile Include="Game\Trade\TradeOfferList.cs" />
+    <Compile Include="Game\TreatyTypes.cs" />
+    <Compile Include="Game\TurnController.cs" />
+    <Compile Include="Game\UnitMoveResult.cs" />
+    <Compile Include="Game\UnitNodeDelegate.cs" />
+    <Compile Include="Game\UnitPathDelegate.cs" />
+    <Compile Include="GenericDelegate.cs" />
+    <Compile Include="GlobalData.cs" />
+    <Compile Include="MusicTypes.cs" />
+    <Compile Include="PointDelegate.cs" />
+    <Compile Include="ReportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDialog.Designer.cs">
+      <DependentUpon>ReportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SendForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendForm.Designer.cs">
+      <DependentUpon>SendForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sovereignty.cs" />
+    <Compile Include="StoredAchievementData.cs" />
+    <Compile Include="TradeRestrictionData.cs" />
+    <Compile Include="UI\ActionMessageData.cs" />
+    <Compile Include="UI\AnimationDelegate.cs" />
+    <Compile Include="UI\AnimationSpriteData.cs" />
+    <Compile Include="UI\CameraBase.cs" />
+    <Compile Include="UI\CheatConsole.cs" />
+    <Compile Include="UI\ConsoleCommand.cs" />
+    <Compile Include="UI\Controls\AnchorPoints.cs" />
+    <Compile Include="UI\Controls\ControlButton.cs" />
+    <Compile Include="UI\Controls\ControlContainer.cs" />
+    <Compile Include="UI\Controls\ControlDelegate.cs" />
+    <Compile Include="UI\Controls\ControlForm.cs" />
+    <Compile Include="UI\Controls\ControlGraph.cs" />
+    <Compile Include="UI\Controls\ControlImage.cs" />
+    <Compile Include="UI\Controls\ControlInput.cs" />
+    <Compile Include="UI\Controls\ControlList.cs" />
+    <Compile Include="UI\Controls\ControlMenu.cs" />
+    <Compile Include="UI\Controls\ControlMouseDelegate.cs" />
+    <Compile Include="UI\Controls\ControlText.cs" />
+    <Compile Include="UI\Controls\ControlVideo.cs" />
+    <Compile Include="UI\Controls\ListItem.cs" />
+    <Compile Include="UI\Controls\ListItemDelegate.cs" />
+    <Compile Include="UI\Controls\MenuItem.cs" />
+    <Compile Include="UI\Controls\MenuItemDelegate.cs" />
+    <Compile Include="UI\Controls\MouseInputTypes.cs" />
+    <Compile Include="UI\Controls\PositionData.cs" />
+    <Compile Include="UI\Controls\UIControl.cs" />
+    <Compile Include="UI\Controls\UIUnits.cs" />
+    <Compile Include="UI\ControlZComparer.cs" />
+    <Compile Include="UI\FloatingSpriteData.cs" />
+    <Compile Include="UI\GameCamera.cs" />
+    <Compile Include="UI\Map\ArrowSprite.cs" />
+    <Compile Include="UI\Map\BattleMap.cs" />
+    <Compile Include="UI\Map\BattleMapModes.cs" />
+    <Compile Include="UI\Map\BattleTile.cs" />
+    <Compile Include="UI\Map\CampaignMap.cs" />
+    <Compile Include="UI\Map\DistanceDelegate.cs" />
+    <Compile Include="UI\Map\DistanceMap.cs" />
+    <Compile Include="UI\Map\DistanceMapValidDelegate.cs" />
+    <Compile Include="UI\Map\MapArrow.cs" />
+    <Compile Include="UI\Map\MapArrowVertex.cs" />
+    <Compile Include="UI\Map\MapColour.cs" />
+    <Compile Include="UI\Map\MapInputManager.cs" />
+    <Compile Include="UI\Map\MapLegendData.cs" />
+    <Compile Include="UI\Map\MapModes.cs" />
+    <Compile Include="UI\Map\MapOutlineVertex.cs" />
+    <Compile Include="UI\Map\MapRenderer.cs" />
+    <Compile Include="UI\Map\MapText.cs" />
+    <Compile Include="UI\Map\MapTextManager.cs" />
+    <Compile Include="UI\Map\MapTextVertex.cs" />
+    <Compile Include="UI\Map\MapVertex.cs" />
+    <Compile Include="UI\Map\ProvinceMeshRenderer.cs" />
+    <Compile Include="UI\Map\RegionOutlineRenderer.cs" />
+    <Compile Include="UI\Map\SpriteButton.cs" />
+    <Compile Include="UI\Map\SpriteButtonDelegate.cs" />
+    <Compile Include="UI\Map\StringDelegate.cs" />
+    <Compile Include="UI\Map\TextLine.cs" />
+    <Compile Include="UI\Map\TileDelegate.cs" />
+    <Compile Include="UI\PanelStates.cs" />
+    <Compile Include="UI\ScriptBase.cs" />
+    <Compile Include="UI\Text\CharacterData.cs" />
+    <Compile Include="UI\Text\FontData.cs" />
+    <Compile Include="UI\Text\FontGlyphData.cs" />
+    <Compile Include="UI\Text\GameFont.cs" />
+    <Compile Include="UI\Text\GameText.cs" />
+    <Compile Include="UI\Text\TextRenderer.cs" />
+    <Compile Include="UI\TickerMessage.cs" />
+    <Compile Include="UI\TickerMessageType.cs" />
+    <Compile Include="UI\UIManager.cs" />
+    <Compile Include="UI\UISprite.cs" />
+    <Compile Include="UI\UIVertex.cs" />
+    <Compile Include="UI\UnitBattleSprite.cs" />
+    <Compile Include="Utility\ConversionUtils.cs" />
+    <Compile Include="Utility\DispositionChangeDelegate.cs" />
+    <Compile Include="Utility\FileManager.cs" />
+    <Compile Include="Utility\FileModes.cs" />
+    <Compile Include="Utility\FileTypes.cs" />
+    <Compile Include="Utility\FontConversionData.cs" />
+    <Compile Include="Utility\FontConvertor.cs" />
+    <Compile Include="Utility\GeomUtils.cs" />
+    <Compile Include="Utility\GLBaseSprite.cs" />
+    <Compile Include="Utility\GLCameraSpaceLineSprite.cs" />
+    <Compile Include="Utility\GLCameraSpacePointSprite.cs" />
+    <Compile Include="Utility\GLFrameBuffer.cs" />
+    <Compile Include="Utility\GLIndexBuffer.cs" />
+    <Compile Include="Utility\GLShader.cs" />
+    <Compile Include="Utility\GLSprite.cs" />
+    <Compile Include="Utility\GLSpriteBatch.cs" />
+    <Compile Include="Utility\GLTexture.cs" />
+    <Compile Include="Utility\GLTextureAtlas.cs" />
+    <Compile Include="Utility\GLVertexAttribute.cs" />
+    <Compile Include="Utility\GLVertexBuffer.cs" />
+    <Compile Include="Utility\GLVertexFormat.cs" />
+    <Compile Include="Utility\LoadedTextureData.cs" />
+    <Compile Include="Utility\LogManager.cs" />
+    <Compile Include="Utility\MessageManager.cs" />
+    <Compile Include="Utility\ModData.cs" />
+    <Compile Include="Utility\ProvinceDelegate.cs" />
+    <Compile Include="Utility\ProvinceRealmDelegate.cs" />
+    <Compile Include="Utility\RealmDelegate.cs" />
+    <Compile Include="Utility\RelationDelegate.cs" />
+    <Compile Include="Utility\ScriptManager.cs" />
+    <Compile Include="Utility\ShaderManager.cs" />
+    <Compile Include="Utility\SoundManager.cs" />
+    <Compile Include="Utility\SpriteBatchDelegate.cs" />
+    <Compile Include="Utility\SpriteDelegate.cs" />
+    <Compile Include="Utility\SpriteManager.cs" />
+    <Compile Include="Utility\SpriteVertex.cs" />
+    <Compile Include="Utility\TextManager.cs" />
+    <Compile Include="Utility\TextureManager.cs" />
+    <Compile Include="Utility\ThreadedGLSLVideoPlayer.cs" />
+    <Compile Include="Utility\TickerMessageDelegate.cs" />
+    <Compile Include="Utility\TooltipFactory.cs" />
+    <Compile Include="Utility\UtilityManager.cs" />
+    <Compile Include="Utility\VideoVertex.cs" />
+    <Compile Include="Utility\WaveData.cs" />
+    <Compile Include="Utility\WavePlayer.cs" />
+    <Compile Include="VersionTypes.cs" />
+    <Compile Include="WarMode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DebugOutputWindow.resources" />
+    <EmbeddedResource Include="ErrorDialog.resources" />
+    <EmbeddedResource Include="ReportDialog.resources" />
+    <EmbeddedResource Include="SendForm.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
