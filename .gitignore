@@ -10,3 +10,7 @@
 **/obj/
 *.pdb
 *.cache
+
+# Local one-off research / scratch scripts
+_research_*.py
+tools/_research/

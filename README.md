@@ -21,6 +21,14 @@ Bug Fixes
 
 5. Fixed a crash when AI uses hero powers.
 
+6. Fixed archer units retaliating when they should not.
+
+7. Fixed Riesental campaign crashes caused by mismatched province name lookups (apostrophe / missing provinces).
+
+8. Dunmar campaign: null-safe LandNode checks on campaign start (avoids NREs when transferring Vessoi stacks).
+
+9. Dunmar campaign: the Cor Vilaad / Dragonhold diplomatic choice now also triggers from full tactical battles, not only autobattles.
+
 Strategy Map
 
 1. Added fog of war to the strategy layer. Armies with scouts have partial information about armies in bordering provinces.
@@ -76,3 +84,17 @@ Interface
 12. The top-bar date always uses English month names, independent of the OS language.
 
 13. Added icon for unit upkeep to unit cards.
+
+14. Reworked the diplomacy / relations screen layout and navigation.
+
+15. Unit cards: transparency fixes, layout tweaks, and updated unit art for several units (including Riesental and footmen).
+
+16. Added a setting to hide / enable selected message-log event types.
+
+17. Battle map: enemy range preview and a more visible zone-of-control marker.
+
+Notes
+
+1. Saves may break after GameData province/map changes. Prefer starting a new campaign after such updates.
+
+2. Campaign script overrides live under GameData/Data/Scripts/Campaigns (currently Riesental and Dunmar). Copy GameData into the game folder to apply them.
