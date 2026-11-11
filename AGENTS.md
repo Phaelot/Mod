@@ -25,7 +25,8 @@ This GitHub repo (`SzymonBylica/sovereigntyMod`) is the maintained line of work.
 
 ## Known sharp edges
 
-- **`CampaignMap.UpdateRealmNameText`** — uses XML `provinceid` with `AllProvinces[id]` (runtime IDs). Can `KeyNotFoundException` on load if IDs don't line up; harden with name/`ContainsKey` lookups if touching this.
+- **`CampaignMap.UpdateRealmNameText`** — resolves contiguous provinces by name/`ContainsKey` (not raw `AllProvinces[xmlId]`). Rebuild+deploy `SovereigntyGameLib.dll` after changing it.
+- **Live install leftovers** — map experiments can leave `hitmap.png`, `Maps/Default/nodes.xml`, `Maps/Default/meshdata.dat`, and Rivenbank rows in install `Data/` even after `GameData/` is clean. Restore from `_backup_rivenbank` / `hitmap.png.bak_rivenbank` (or vanilla) and redeploy `GameData/Data/sov_*.xml`. Stale `nodes.xml` with province 270 + cleaned XML crashes `RegionOutlineRenderer.Update`.
 - **Dunmar diplomatic choice** — must listen to both `AutoBattleStart` and `FullBattleStarted` (tactical), or the Cor Vilaad / Dragonhold popup never appears.
 - **Riesental** — province names in scripts must match `sov_data.xml` exactly (ASCII apostrophes, etc.).
 

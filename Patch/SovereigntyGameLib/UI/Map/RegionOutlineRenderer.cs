@@ -71,13 +71,22 @@ namespace SovereigntyTK.UI.Map
 					{
 						foreach (ProvinceLink adjacentProvince in item.AdjacentProvinces)
 						{
-							ProvinceData provinceData = Game.Data.ProvincesByID[adjacentProvince.LinkedProvinceID] as ProvinceData;
-							if (!adjacentProvince.IgnoreForBorders && adjacentProvince.LinkType != ProvinceLinkTypes.River && adjacentProvince.LinkType != ProvinceLinkTypes.Bridge && !list3.Contains(provinceData) && RegionNames.Contains(provinceData.Name))
+							if (adjacentProvince.IgnoreForBorders || adjacentProvince.LinkType == ProvinceLinkTypes.River || adjacentProvince.LinkType == ProvinceLinkTypes.Bridge)
 							{
-								list2.Remove(provinceData);
-								list3.Add(provinceData);
-								flag = true;
+								continue;
 							}
+							if (!Game.Data.ProvincesByID.ContainsKey(adjacentProvince.LinkedProvinceID))
+							{
+								continue;
+							}
+							ProvinceData provinceData = Game.Data.ProvincesByID[adjacentProvince.LinkedProvinceID] as ProvinceData;
+							if (provinceData == null || list3.Contains(provinceData) || !RegionNames.Contains(provinceData.Name))
+							{
+								continue;
+							}
+							list2.Remove(provinceData);
+							list3.Add(provinceData);
+							flag = true;
 						}
 					}
 				}
@@ -165,7 +174,13 @@ namespace SovereigntyTK.UI.Map
 						provinceData = RegionProvince;
 						break;
 					}
-					if (!RegionProvinces.Contains(Game.Data.ProvincesByID[adjacentProvince.LinkedProvinceID] as ProvinceData))
+					if (!Game.Data.ProvincesByID.ContainsKey(adjacentProvince.LinkedProvinceID))
+					{
+						provinceData = RegionProvince;
+						break;
+					}
+					ProvinceData linkedProvince = Game.Data.ProvincesByID[adjacentProvince.LinkedProvinceID] as ProvinceData;
+					if (linkedProvince == null || !RegionProvinces.Contains(linkedProvince))
 					{
 						provinceData = RegionProvince;
 						break;
@@ -193,7 +208,7 @@ namespace SovereigntyTK.UI.Map
 					}
 					foreach (int attachedProvince in vertexPoint2.AttachedProvinces)
 					{
-						if (Game.Data.ProvinceOutlines[attachedProvince].Province != null)
+						if (Game.Data.ProvinceOutlines.ContainsKey(attachedProvince) && Game.Data.ProvinceOutlines[attachedProvince].Province != null)
 						{
 							ProvinceData province = Game.Data.ProvinceOutlines[attachedProvince].Province;
 							if (!RegionProvinces.Contains(province))
@@ -223,8 +238,12 @@ namespace SovereigntyTK.UI.Map
 				bool flag = false;
 				foreach (VertexPoint item in sharedPoints)
 				{
+					if (!Game.Data.ProvinceOutlines.ContainsKey(item.ProvinceID))
+					{
+						continue;
+					}
 					ProvinceData province2 = Game.Data.ProvinceOutlines[item.ProvinceID].Province;
-					if (RegionProvinces.Contains(province2))
+					if (province2 != null && RegionProvinces.Contains(province2))
 					{
 						if (list.Count > 2 && item.NextPoint == vertexPoint)
 						{
@@ -272,8 +291,13 @@ namespace SovereigntyTK.UI.Map
 					bool flag4 = false;
 					foreach (int attachedProvince2 in item2.Point2.AttachedProvinces)
 					{
+						if (!Game.Data.ProvinceOutlines.ContainsKey(attachedProvince2))
+						{
+							flag4 = true;
+							continue;
+						}
 						ProvinceData province3 = Game.Data.ProvinceOutlines[attachedProvince2].Province;
-						if (RegionProvinces.Contains(province3))
+						if (province3 != null && RegionProvinces.Contains(province3))
 						{
 							flag3 = true;
 						}
@@ -337,11 +361,23 @@ namespace SovereigntyTK.UI.Map
 		{
 			List<VertexPoint> list = new List<VertexPoint>();
 			list.Add(LastPoint);
+			if (!Game.Data.ProvinceOutlines.ContainsKey(LastPoint.ProvinceID))
+			{
+				return list;
+			}
 			ProvinceOutlineData provinceOutlineData = Game.Data.ProvinceOutlines[LastPoint.ProvinceID];
+			if (provinceOutlineData.Province == null)
+			{
+				return list;
+			}
 			foreach (ProvinceLink adjacentProvince in provinceOutlineData.Province.AdjacentProvinces)
 			{
+				if (!Game.Data.ProvincesByID.ContainsKey(adjacentProvince.LinkedProvinceID))
+				{
+					continue;
+				}
 				ProvinceData provinceData = Game.Data.ProvincesByID[adjacentProvince.LinkedProvinceID] as ProvinceData;
-				if (provinceData.Outline != null)
+				if (provinceData != null && provinceData.Outline != null)
 				{
 					VertexPoint pointAt = provinceData.Outline.GetPointAt(LastPoint.Point);
 					if (pointAt != null)

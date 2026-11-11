@@ -668,24 +668,47 @@ namespace SovereigntyTK.UI.Map
 			while (list3.Count > 0)
 			{
 				List<int> list4 = new List<int>();
-				list4.Add(Game.Data.ActiveProvinces[list3[0].Name].ID);
+				WorkingProvince seed = list3[0];
 				list3.RemoveAt(0);
+				if (!Game.Data.ActiveProvinces.ContainsKey(seed.Name))
+				{
+					continue;
+				}
+				list4.Add(Game.Data.ActiveProvinces[seed.Name].ID);
 				bool flag = true;
 				while (flag)
 				{
 					flag = false;
 					foreach (int item in list4.ToList())
 					{
+						if (!Game.Data.ProvincesByID.ContainsKey(item))
+						{
+							continue;
+						}
 						ProvinceData provinceData = Game.Data.ProvincesByID[item] as ProvinceData;
+						if (provinceData == null)
+						{
+							continue;
+						}
 						foreach (ProvinceLink adjacentProvince in provinceData.AdjacentProvinces)
 						{
-							WorkingProvince Linked = Game.CurrentGame.AllProvinces[adjacentProvince.LinkedProvinceID];
-							if (!adjacentProvince.IgnoreForBorders && !list4.Contains(Linked.ID) && list2.Contains(Linked.Name))
+							if (adjacentProvince.IgnoreForBorders || !Game.Data.ProvincesByID.ContainsKey(adjacentProvince.LinkedProvinceID))
 							{
-								list3.RemoveAll((WorkingProvince x) => x.Name == Linked.Name);
-								list4.Add(Linked.ID);
-								flag = true;
+								continue;
 							}
+							ProvinceData linkedData = Game.Data.ProvincesByID[adjacentProvince.LinkedProvinceID] as ProvinceData;
+							if (linkedData == null)
+							{
+								continue;
+							}
+							WorkingProvince Linked = Game.CurrentGame.GetProvince(linkedData.Name);
+							if (Linked == null || !list2.Contains(Linked.Name) || list4.Contains(linkedData.ID))
+							{
+								continue;
+							}
+							list3.RemoveAll((WorkingProvince x) => x.Name == Linked.Name);
+							list4.Add(linkedData.ID);
+							flag = true;
 						}
 					}
 				}
