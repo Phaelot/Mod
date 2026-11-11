@@ -96,7 +96,7 @@ namespace SovereigntyTK.Game.ActiveGameData.Cards
             //only cast if your weakest unit is damaged enough
             if (WorstFriendly.Key.Health > 33) return 0;
 
-            float Ratio = (float)BestEnemy.Value / (float)WorstFriendly.Value;
+            float Ratio = (float)BestEnemy.Value / (float)Math.Max(1, WorstFriendly.Value);
 
             if (Ratio >= 3) return 100;
             else if (Ratio >= 2) return 70;
@@ -105,16 +105,16 @@ namespace SovereigntyTK.Game.ActiveGameData.Cards
 
         public KeyValuePair<WorkingUnit, int> GetBestEnemyUnit()
         {
-            int HighValue = int.MaxValue;
+            int HighValue = int.MinValue;
             WorkingUnit HighUnit = null;
 
-            foreach (WorkingUnit Unit in Battle.ActiveStack.Units)
+            foreach (WorkingUnit Unit in Battle.InactiveStack.Units)
             {
-                if (Unit.Health <= 0) continue;
+                if (!CanBeSacrificed(Unit)) continue;
 
                 int Value = GetUnitValue(Unit);
 
-                if (Value < HighValue)
+                if (Value > HighValue)
                 {
                     HighValue = Value;
                     HighUnit = Unit;
@@ -131,7 +131,7 @@ namespace SovereigntyTK.Game.ActiveGameData.Cards
 
             foreach (WorkingUnit Unit in Battle.ActiveStack.Units)
             {
-                if (Unit.Health <= 0) continue;
+                if (!CanBeSacrificed(Unit)) continue;
 
                 int Value = GetUnitValue(Unit);
 
@@ -143,6 +143,14 @@ namespace SovereigntyTK.Game.ActiveGameData.Cards
             }
 
             return new KeyValuePair<WorkingUnit, int>(LowUnit, LowValue);
+        }
+
+        // Same unit rules as TileTargetValid, so the cast decision only weighs legal targets.
+        private bool CanBeSacrificed(WorkingUnit Unit)
+        {
+            if (Unit.Disabled || Unit.Health <= 0) return false;
+            if (Unit.Rank != Data.UnitRanks.Standard && Unit.Rank != Data.UnitRanks.Mercenary) return false;
+            return Unit.Medals == 0;
         }
 
         public int GetUnitValue(WorkingUnit Unit)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Drawing;
 using System.IO;
 using System.Threading;
@@ -27,6 +28,8 @@ namespace SovereigntyTK.UI
         static readonly Color NormalColour = Color.FromArgb(255, 238, 161);
         // White for the filterable categories: foreign treaties + battle reports (always white when shown).
         static readonly Color HighlightColour = Color.FromArgb(255, 255, 255);
+        static readonly string[] HighlightTextNames = { "NEW_TREATY", "END_TREATY", "BATTLE_ATTACKED", "BATTLE_DEFEATED" };
+        List<string> HighlightPhrases;
 
         class TickerEntry
         {
@@ -101,15 +104,9 @@ namespace SovereigntyTK.UI
 
             TickerMessage Msg = (TickerMessage)Args[0];
 
-            // Suppress AI-vs-AI treaty chatter when the gameplay setting is enabled (default).
-            if (GameSystem.Settings.GetBooleanSetting("FilterForeignTreatyMessages") && IsForeignTreatyMessage(Msg)) return;
-
-            // Suppress AI-vs-AI "X attacks Y" / "X defeats Y" when enabled (off by default).
-            if (GameSystem.Settings.GetBooleanSetting("FilterForeignBattleMessages") && IsForeignBattleMessage(Msg)) return;
-
+            // Foreign treaty/battle filtering happens where the messages are raised (SovereigntyGameLib).
             GameText Text = GameText.CreateLocalised("FORMAT_TICKER");
             Text.AddChildText(Msg.MessageText);
-            // Settings only filter visibility; highlight colour is independent.
             TickerEntry Entry = new TickerEntry { Text = Text, UseHighlight = IsHighlightText(Msg.MessageText) || IsHighlightText(Text) };
 
             lock (EntryLock)
@@ -127,68 +124,29 @@ namespace SovereigntyTK.UI
         {
             if (Text == null) return false;
 
-            if (IsTreatyTextName(Text.TextName) || IsBattleTextName(Text.TextName)) return true;
+            if (HighlightTextNames.Contains(Text.TextName)) return true;
 
-            // FORMAT_TICKER wrappers / older literal entries: match resolved text.
+            // Saved logs and FORMAT_TICKER wrappers only have the resolved string, so match it
+            // against the fixed part of each template in the current language.
             string Resolved = Text.GetActualText(GameSystem);
-            return ContainsTreatyPhrase(Resolved) || ContainsBattlePhrase(Resolved);
+            if (string.IsNullOrEmpty(Resolved)) return false;
+            if (HighlightPhrases == null) HighlightPhrases = BuildHighlightPhrases();
+            return HighlightPhrases.Any(Phrase => Resolved.IndexOf(Phrase, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        private static bool IsTreatyTextName(string Name)
+        // Longest literal fragment between [textN] placeholders, e.g. " Treaty signed between ".
+        private List<string> BuildHighlightPhrases()
         {
-            return Name == "NEW_TREATY" || Name == "END_TREATY";
-        }
-
-        private static bool IsBattleTextName(string Name)
-        {
-            return Name == "BATTLE_ATTACKED" || Name == "BATTLE_DEFEATED";
-        }
-
-        private static bool ContainsBattlePhrase(string Text)
-        {
-            if (string.IsNullOrEmpty(Text)) return false;
-            // Fallback for pre-localisation literal tickers still in the log.
-            return Text.IndexOf(" attacks ", StringComparison.Ordinal) >= 0
-                || Text.IndexOf(" defeats ", StringComparison.Ordinal) >= 0
-                || Text.IndexOf(" greift ", StringComparison.Ordinal) >= 0
-                || Text.IndexOf(" besiegt ", StringComparison.Ordinal) >= 0;
-        }
-
-        private static bool ContainsTreatyPhrase(string Text)
-        {
-            if (string.IsNullOrEmpty(Text)) return false;
-            return Text.IndexOf("Treaty signed between", StringComparison.OrdinalIgnoreCase) >= 0
-                || Text.IndexOf("Treaty ended between", StringComparison.OrdinalIgnoreCase) >= 0
-                || Text.IndexOf("Abkommen zwischen", StringComparison.OrdinalIgnoreCase) >= 0;
-        }
-
-        private bool IsForeignTreatyMessage(TickerMessage Msg)
-        {
-            if (Msg.MessageType != TickerMessageType.Diplomacy) return false;
-            if (Msg.MessageText == null) return false;
-            if (!IsTreatyTextName(Msg.MessageText.TextName)) return false;
-
-            WorkingRealm Player = GameSystem.CurrentGame.PlayerRealm;
-            if (Player == null) return true;
-
-            string PlayerName = GameText.CreateLocalised(Player.DisplayName).GetActualText(GameSystem);
-            string FullText = Msg.MessageText.GetActualText(GameSystem);
-            return FullText.IndexOf(PlayerName, System.StringComparison.OrdinalIgnoreCase) < 0;
-        }
-
-        private bool IsForeignBattleMessage(TickerMessage Msg)
-        {
-            // Same pattern as treaties: identify by TextName, then hide if player display name absent.
-            if (Msg.MessageText == null) return false;
-            if (!IsBattleTextName(Msg.MessageText.TextName)) return false;
-
-            WorkingRealm Player = GameSystem.CurrentGame.PlayerRealm;
-            if (Player == null) return true;
-
-            string PlayerDisplay = GameText.CreateLocalised(Player.DisplayName).GetActualText(GameSystem);
-            string FullText = Msg.MessageText.GetActualText(GameSystem);
-            return string.IsNullOrEmpty(PlayerDisplay)
-                || FullText.IndexOf(PlayerDisplay, System.StringComparison.OrdinalIgnoreCase) < 0;
+            List<string> Phrases = new List<string>();
+            foreach (string Name in HighlightTextNames)
+            {
+                string Template = GameText.CreateLocalised(Name).GetActualText(GameSystem);
+                string Longest = Regex.Split(Template, @"\[[Tt]ext\d+\]")
+                    .OrderByDescending(Part => Part.Trim().Length)
+                    .FirstOrDefault();
+                if (Longest != null && Longest.Trim().Length >= 4) Phrases.Add(Longest);
+            }
+            return Phrases;
         }
 
         public override void Dispose()

@@ -61,17 +61,17 @@ namespace SovereigntyTK.Data.Scripts.Campaigns
 
         protected override void CreateObjectives()
         {
-            ObjProvince1 = new ObjectiveBoolean(Game, true, "ProvinceOwnerChanged", Params => { if (Game.CurrentGame.GetProvince("Galisong").OwnerRealm == Game.CurrentGame.PlayerRealm) return Results.Complete; else return Results.Incomplete; });
+            ObjProvince1 = new ObjectiveBoolean(Game, true, "ProvinceOwnerChanged", Params => { if (IsPlayerOwned("Galisong")) return Results.Complete; else return Results.Incomplete; });
             ObjProvince1.TargetProvince = "Galisong";
             ObjProvince1.SetText("OBJ_RIESENTAL_PROVINCE1_TITLE", "OBJ_RIESENTAL_PROVINCE1");
             AddObjective(ObjProvince1);
 
-            ObjProvince2 = new ObjectiveBoolean(Game, true, "ProvinceOwnerChanged", Params => { if (Game.CurrentGame.GetProvince("Feybrunn").OwnerRealm == Game.CurrentGame.PlayerRealm) return Results.Complete; else return Results.Incomplete; });
+            ObjProvince2 = new ObjectiveBoolean(Game, true, "ProvinceOwnerChanged", Params => { if (IsPlayerOwned("Feybrunn")) return Results.Complete; else return Results.Incomplete; });
             ObjProvince2.TargetProvince = "Feybrunn";
             ObjProvince2.SetText("OBJ_RIESENTAL_PROVINCE2_TITLE", "OBJ_RIESENTAL_PROVINCE2");
             AddObjective(ObjProvince2);
 
-            ObjProvince3 = new ObjectiveBoolean(Game, true, "ProvinceOwnerChanged", Params => { if (Game.CurrentGame.GetProvince("Telonnen").OwnerRealm == Game.CurrentGame.PlayerRealm) return Results.Complete; else return Results.Incomplete; });
+            ObjProvince3 = new ObjectiveBoolean(Game, true, "ProvinceOwnerChanged", Params => { if (IsPlayerOwned("Telonnen")) return Results.Complete; else return Results.Incomplete; });
             ObjProvince3.TargetProvince = "Telonnen";
             ObjProvince3.SetText("OBJ_RIESENTAL_PROVINCE3_TITLE", "OBJ_RIESENTAL_PROVINCE3");
             AddObjective(ObjProvince3);
@@ -114,6 +114,12 @@ namespace SovereigntyTK.Data.Scripts.Campaigns
             });
             ObjTrade.SetText("OBJ_RIESENTAL_TRADE_TITLE", "OBJ_RIESENTAL_TRADE");
             AddObjective(ObjTrade, false, false);
+        }
+
+        private bool IsPlayerOwned(string ProvinceName)
+        {
+            WorkingProvince Province = Game.CurrentGame.GetProvince(ProvinceName);
+            return Province != null && Province.OwnerRealm == Game.CurrentGame.PlayerRealm;
         }
 
         protected override void CampaignStarted()
@@ -192,12 +198,15 @@ namespace SovereigntyTK.Data.Scripts.Campaigns
                         }
                     }
 
-                    for (int i = 0; i < 4 && TargetProvinces.Count > 0; i++)
+                    UnitData UnitType;
+                    Game.Data.Units.TryGetValue("Riesental.Rangers", out UnitType);
+
+                    for (int i = 0; i < 4 && TargetProvinces.Count > 0 && UnitType != null; i++)
                     {
                         WorkingProvince Province = TargetProvinces[RNG.Next(TargetProvinces.Count)];
                         TargetProvinces.Remove(Province);
+                        if (Province.LandNode == null) continue;
 
-                        UnitData UnitType = Game.Data.Units["Riesental.Rangers"];
                         WorkingUnit Unit = Game.CurrentGame.CreateUnit(Game.CurrentGame.RebelRealm.ID, UnitType);
 
                         WorkingStack Stack = Province.LandNode.CurrentStack;

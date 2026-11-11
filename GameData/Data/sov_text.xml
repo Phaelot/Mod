@@ -4056,7 +4056,6 @@
     <Row textid="TT_PROVINCE_NATURAL_ALT" english="Secondary rightful owner: [text1]\n" german="Zweiter rechtmäßiger Besitzer: [text1]\n" />
     <Row textid="TT_SEA_ZONE" english="Sea zone" german="Seegebiet" />
     <Row textid="TT_DIPLOMACY_HOME" english="View your realm" german="Eigenes Reich anzeigen" />
-    <Row textid="UNITNAME_RIESENTAL_POACHERS" english="Poachers" german="Wilderer" />
     <Row textid="TT_TERRAIN_DESC_PLAINS" english="Open farmland and pasture. Battles here favour movement and clear lines of fire — little cover for either side." german="Offenes Acker- und Weideland. Kämpfe begünstigen Bewegung und freies Schussfeld — wenig Deckung für beide Seiten." />
     <Row textid="TT_TERRAIN_DESC_HILLS" english="Rolling high ground and broken slopes. Expect harder fighting for the heights; attackers and defenders both gain from the ridges." german="Hügeliges Hochland. Mit härteren Kämpfen um die Höhen rechnen; Angreifer und Verteidiger profitieren von den Kämmen." />
     <Row textid="TT_TERRAIN_DESC_MOUNTAIN" english="Steep rock and narrow passes. Ground is hard to cross and favours a stubborn defence; expect slow, grinding battle." german="Steiles Gestein und enge Pässe. Schwer zu durchqueren, begünstigt hartnäckige Verteidigung; mit zähem Kampf rechnen." />

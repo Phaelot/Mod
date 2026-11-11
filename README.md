@@ -7,6 +7,8 @@ Original decompiled game library code source is in "DecompiledSource" folder.
 
 Game Data files changed by this fork (UI scripts, XML, text and images) are in the "GameData" folder, which mirrors the game folder. Copy its contents into the game folder, overwriting existing files.
 
+Always install the GameData files and SovereigntyGameLib.dll from the same version. The UI scripts rely on settings and code that only exist in the matching DLL, so mixing an older DLL with newer GameData (or the other way round) can break the game or crash it on load.
+
 ====================================================
 
 Bug Fixes
@@ -98,3 +100,5 @@ Notes
 1. Saves may break after GameData province/map changes. Prefer starting a new campaign after such updates.
 
 2. Campaign script overrides live under GameData/Data/Scripts/Campaigns (currently Riesental and Dunmar). Copy GameData into the game folder to apply them.
+
+3. Balance change (under testing): an Archer with an enemy adjacent to it can no longer use Support Fire or Counter Fire. In vanilla this only blocked its own ranged attacks. Because a melee attacker often ends its move next to a supporting Archer too, melee attacks now trigger Support Fire less often than before.

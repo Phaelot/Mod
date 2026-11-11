@@ -733,7 +733,7 @@ namespace SovereigntyTK.Game.ActiveGameData
 			{
 				this.RemoveFlag(unitFlag);
 			}
-			// Shield Wall is granted with default TurnCount (-1) and must not persist strategically.
+			// Saves from before Shield Wall got TurnCount = 1 can carry permanent (-1) copies.
 			this.RemoveNamedFlags("Shield Wall", 0);
 			if (this.BattleData == null)
 			{

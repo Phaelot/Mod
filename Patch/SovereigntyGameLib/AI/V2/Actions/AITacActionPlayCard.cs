@@ -25,9 +25,13 @@ namespace SovereigntyTK.AI.V2.Actions
 					{
 						this.Card.CastEffect(this.CardTargets);
 					}
-					catch (NullReferenceException)
+					catch (NullReferenceException ex)
 					{
-						// Stale tile/unit between AI target pick and acknowledgement.
+						// Stale tile/unit between AI target pick and acknowledgement; the card is still consumed.
+						if (this.AI != null)
+						{
+							this.AI.Log("Card " + this.Card.Name + " failed to cast: " + ex.Message + "\n" + ex.StackTrace);
+						}
 					}
 				}
 

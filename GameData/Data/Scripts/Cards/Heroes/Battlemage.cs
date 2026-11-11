@@ -70,7 +70,7 @@ namespace SovereigntyTK.Game.ActiveGameData.Cards
 
             if (Unit.HasAnyNamedFlag("Immune_War")) return 0;
 
-            int Result = 0;
+            int Result = 2;
 
             Result += Math.Min(0, Unit.Defence.GetValue() - 2);
             Result += Math.Min(0, Unit.Attack.GetValue() - 2);
@@ -78,8 +78,6 @@ namespace SovereigntyTK.Game.ActiveGameData.Cards
             int RemainingLife = Unit.Health;
             RemainingLife -= 35;
             if (Unit.HasAnyNamedFlag("Vulnerable_War")) RemainingLife -= 35;
-
-            RemainingLife = Math.Min(0, RemainingLife);
 
             if (RemainingLife <= 20)
             {
@@ -89,7 +87,8 @@ namespace SovereigntyTK.Game.ActiveGameData.Cards
 
             if (Unit.HasAnyNamedFlag("Vulnerable_War")) Result *= 2;
 
-            return Result;
+            // The AI picks targets by weighted random over these values; negatives corrupt the pick.
+            return Math.Max(0, Result);
         }
 
         public override int GetAICastChance()

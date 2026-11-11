@@ -223,24 +223,6 @@ namespace SovereigntyTK.Game
 		private void HandleTickerMessage(string EventName, params object[] Args)
 		{
 			TickerMessage tickerMessage = (TickerMessage)Args[0];
-			if (GameCore.Settings.GetBooleanSetting("FilterForeignTreatyMessages")
-				&& tickerMessage.MessageType == TickerMessageType.Diplomacy
-				&& tickerMessage.MessageText != null
-				&& (tickerMessage.MessageText.TextName == "NEW_TREATY" || tickerMessage.MessageText.TextName == "END_TREATY")
-				&& PlayerRealm != null)
-			{
-				string playerName = GameText.CreateLocalised(PlayerRealm.DisplayName, new object[0]).GetActualText(GameCore);
-				string fullText = tickerMessage.MessageText.GetActualText(GameCore);
-				if (fullText.IndexOf(playerName, StringComparison.OrdinalIgnoreCase) < 0)
-				{
-					return;
-				}
-			}
-			if (GameCore.Settings.GetBooleanSetting("FilterForeignBattleMessages")
-				&& IsForeignBattleTickerMessage(tickerMessage))
-			{
-				return;
-			}
 			if (TickerTexts.Count == 50)
 			{
 				TickerTexts.RemoveAt(0);
@@ -248,24 +230,6 @@ namespace SovereigntyTK.Game
 			GameText gameText = GameText.CreateLocalised("FORMAT_TICKER");
 			gameText.AddChildText(tickerMessage.MessageText);
 			TickerTexts.Add(gameText);
-		}
-
-		// Same pattern as treaties: identify by TextName (BATTLE_ATTACKED / BATTLE_DEFEATED).
-		private bool IsForeignBattleTickerMessage(TickerMessage tickerMessage)
-		{
-			if (tickerMessage.MessageText == null || PlayerRealm == null)
-			{
-				return false;
-			}
-			string name = tickerMessage.MessageText.TextName;
-			if (name != "BATTLE_ATTACKED" && name != "BATTLE_DEFEATED")
-			{
-				return false;
-			}
-			string playerDisplay = GameText.CreateLocalised(PlayerRealm.DisplayName, new object[0]).GetActualText(GameCore);
-			string fullText = tickerMessage.MessageText.GetActualText(GameCore);
-			return string.IsNullOrEmpty(playerDisplay)
-				|| fullText.IndexOf(playerDisplay, StringComparison.OrdinalIgnoreCase) < 0;
 		}
 
 		private void HandleProvinceOccupierChanged(string EventName, params object[] Args)
