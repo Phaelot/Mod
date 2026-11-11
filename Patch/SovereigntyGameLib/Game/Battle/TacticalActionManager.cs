@@ -100,11 +100,14 @@ namespace SovereigntyTK.Game.Battle
 			}
 			if (ActionType != CombatAction.Move && ActionType != CombatAction.Heal)
 			{
+				// Support Fire: adjacent friendly Archers. Same as initiating a ranged attack —
+				// engaged Archers cannot shoot (tutorial: melee them first to cancel Support Fire).
 				List<WorkingUnit> list2 = Battle.Map.GetAdjacentEnemies(UnitB.BattleData.BattleLocation, UnitA.OwnerRealmID);
 				list2 = list2.Where((WorkingUnit x) => x.Class == UnitClasses.Archer && x.BattleData.CanFight && x.RangedAttack.GetValue(UnitA) > 0).ToList<WorkingUnit>();
 				foreach (WorkingUnit workingUnit in list2)
 				{
-					if (!workingUnit.HasStatus("ClassAbilitiesBlocked", new object[0]))
+					if (!workingUnit.HasStatus("ClassAbilitiesBlocked", new object[0])
+						&& Battle.Map.GetAdjacentEnemies(workingUnit.BattleData.BattleLocation, workingUnit.OwnerRealmID).Count == 0)
 					{
 						UnitActionData unitActions = Battle.GetUnitActions(workingUnit);
 						if (unitActions.TilesinRange.Contains(UnitA.BattleData.BattleLocation))
@@ -119,7 +122,10 @@ namespace SovereigntyTK.Game.Battle
 						}
 					}
 				}
-				if (UnitB.Class == UnitClasses.Archer && UnitB.BattleData.CanFight && UnitB.RangedAttack.GetValue(UnitA) > 0 && !UnitB.HasStatus("ClassAbilitiesBlocked", new object[0]))
+				// Counter Fire: defender Archer return fire. Must be unengaged — same gate as
+				// GetActionsOnTarget RangedAttack (tutorial: melee first to cancel Counter Fire).
+				if (UnitB.Class == UnitClasses.Archer && UnitB.BattleData.CanFight && UnitB.RangedAttack.GetValue(UnitA) > 0 && !UnitB.HasStatus("ClassAbilitiesBlocked", new object[0])
+					&& Battle.Map.GetAdjacentEnemies(UnitB.BattleData.BattleLocation, UnitB.OwnerRealmID).Count == 0)
 				{
 					UnitActionData unitActions2 = Battle.GetUnitActions(UnitB);
 					if (unitActions2.TilesinRange.Contains(UnitA.BattleData.BattleLocation))

@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<form name="MainForm">
+  <fullscreen>true</fullscreen>
+  <scriptfile>SovereigntyTK.UI.TradeTable</scriptfile>
+  <onload>FormLoaded</onload>
+  <visible>false</visible>
+  <name>TradeTable</name>
+
+  <control type="image">
+    <name>BG</name>
+    <fullscreen>true</fullscreen>
+    <forcemouse>true</forcemouse>
+    <imagefile>Data\Images\Hud\bg.png</imagefile>
+    <ignoremousemove>true</ignoremousemove>
+  </control>
+
+  <control type="image">
+    <name>PanelBG</name>
+    <width>960px</width>
+    <height>600px</height>
+    <anchor>Middle</anchor>
+    
+    <control type="image">
+      <name>BG_Frame</name>
+      <height>625px</height>
+      <width>988px</width>
+      <anchor>Middle</anchor>
+      <imagefile>Data\Images\HUD\Purchase\unitwindow.png</imagefile>
+    </control>
+      
+    <control type="text">
+      <name>TradeTitleText</name>
+      <width>960px</width>
+      <height>30px</height>
+      <offsety>10px</offsety>
+      <fontname>Trebuchet MS</fontname>
+      <fontsize>24px</fontsize>
+      <fontcolour>255,238,161</fontcolour>
+      <textanchor>Middle</textanchor>
+      <bold>true</bold>
+    </control>
+      
+    <control type="image">
+      <name>OurItemsBG</name>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+      <width>230px</width>
+      <height>500px</height>
+      <anchor>Middle</anchor>
+      <offsetx>-360px</offsetx>
+      <offsety>20px</offsety>
+    
+      <control type="text">
+        <name>OurItemsTitle</name>
+        <width>230px</width>
+        <height>20px</height>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>14px</fontsize>
+        <fontcolour>255,238,161</fontcolour>
+        <textanchor>Middle</textanchor>
+        <bold>true</bold>
+      </control>
+    </control>
+  
+    <control type="image">
+      <name>OurOffersBG</name>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+      <width>230px</width>
+      <height>250px</height>
+      <anchor>Middle</anchor>
+      <offsetx>-120px</offsetx>
+      <offsety>-105px</offsety>
+    
+      <control type="text">
+        <name>OurOffersTitle</name>
+        <width>230px</width>
+        <height>20px</height>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>14px</fontsize>
+        <fontcolour>255,238,161</fontcolour>
+        <textanchor>Middle</textanchor>
+        <bold>true</bold>
+      </control>
+    </control>
+
+    <control type="image">
+      <name>TheirOffersBG</name>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+      <width>230px</width>
+      <height>250px</height>
+      <anchor>Middle</anchor>
+      <offsetx>120px</offsetx>
+      <offsety>-105px</offsety>
+    
+      <control type="text">
+        <name>TheirOffersTitle</name>
+        <width>230px</width>
+        <height>20px</height>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>14px</fontsize>
+        <fontcolour>255,238,161</fontcolour>
+        <textanchor>Middle</textanchor>
+        <bold>true</bold>
+      </control>
+    </control>
+
+    <control type="image">
+      <name>TheirItemsBG</name>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+      <width>230px</width>
+      <height>500px</height>
+      <anchor>Middle</anchor>
+      <offsetx>360px</offsetx>
+      <offsety>20px</offsety>
+    
+      <control type="text">
+        <name>TheirItemsTitle</name>
+        <width>230px</width>
+        <height>20px</height>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>14px</fontsize>
+        <fontcolour>255,238,161</fontcolour>
+        <textanchor>Middle</textanchor>
+        <bold>true</bold>
+      </control>
+    </control>
+
+    <control type="image">
+      <name>AcceptanceBG</name>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+      <width>460px</width>
+      <height>190px</height>
+      <anchor>Middle</anchor>
+      <offsety>120px</offsety>
+
+      <control type="text">
+        <name>AcceptanceTitle</name>
+        <width>460px</width>
+        <height>18px</height>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>13px</fontsize>
+        <fontcolour>255,238,161</fontcolour>
+        <textanchor>Middle</textanchor>
+        <bold>true</bold>
+      </control>
+
+      <control type="text">
+        <name>AcceptanceStatusText</name>
+        <width>444px</width>
+        <height>28px</height>
+        <offsety>20px</offsety>
+        <offsetx>8px</offsetx>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>11px</fontsize>
+        <fontcolour>220,220,200</fontcolour>
+        <textanchor>TopLeft</textanchor>
+      </control>
+
+      <control type="text">
+        <name>AcceptancePosText</name>
+        <width>218px</width>
+        <height>136px</height>
+        <offsety>48px</offsety>
+        <offsetx>8px</offsetx>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>11px</fontsize>
+        <fontcolour>160,220,160</fontcolour>
+        <textanchor>TopLeft</textanchor>
+      </control>
+
+      <control type="text">
+        <name>AcceptanceNegText</name>
+        <width>218px</width>
+        <height>136px</height>
+        <offsety>48px</offsety>
+        <offsetx>234px</offsetx>
+        <fontname>Trebuchet MS</fontname>
+        <fontsize>11px</fontsize>
+        <fontcolour>220,160,160</fontcolour>
+        <textanchor>TopLeft</textanchor>
+      </control>
+    </control>
+
+    <control type="container">
+      <name>PlayerTradeButtons</name>
+      <width>230px</width>
+      <height>50px</height>
+      <anchor>BottomMiddle</anchor>
+      <offsety>55px</offsety>
+    
+      <control type="button">
+        <name>ClearButton</name>
+        <width>100px</width>
+        <height>30px</height>
+        <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+        <onclick>ClearButtonClick</onclick>
+        <tooltip>TT_CLEARTRADE</tooltip>
+        <anchor>Middle</anchor>
+        <offsetx>-55px</offsetx>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>0,0,0</fontcolour>
+          <fontsize>14px</fontsize>
+          <width>100px</width>
+          <height>30px</height>
+          <bold>true</bold>
+          <text>CLEARTRADE</text>
+          <textanchor>Middle</textanchor>
+        </control>  
+      </control>
+      
+      <control type="button">
+        <name>OfferButton</name>
+        <width>100px</width>
+        <height>30px</height>
+        <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+        <onclick>OfferButtonClick</onclick>
+        <tooltip>TT_OFFERTRADE</tooltip>
+        <anchor>Middle</anchor>
+        <offsetx>55px</offsetx>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>0,0,0</fontcolour>
+          <fontsize>14px</fontsize>
+          <width>100px</width>
+          <height>30px</height>
+          <bold>true</bold>
+          <text>OFFERTRADE</text>
+          <textanchor>Middle</textanchor>
+        </control>  
+      </control>
+    </control>
+    
+    <control type="container">
+      <name>AITradeButtons</name>
+      <width>340px</width>
+      <height>50px</height>
+      <anchor>BottomMiddle</anchor>
+      <offsety>100px</offsety>
+    
+      <control type="button">
+        <name>AcceptButton</name>
+        <width>100px</width>
+        <height>30px</height>
+        <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+        <onclick>AcceptButtonClick</onclick>
+        <tooltip>TT_ACCEPTTRADE</tooltip>
+        <anchor>Middle</anchor>
+        <offsetx>-110px</offsetx>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>0,0,0</fontcolour>
+          <fontsize>14px</fontsize>
+          <width>100px</width>
+          <height>30px</height>
+          <bold>true</bold>
+          <text>TRADEACCEPTTEXT</text>
+          <textanchor>Middle</textanchor>
+        </control>  
+      </control>
+        
+      <control type="button">
+        <name>RejectButton</name>
+        <width>100px</width>
+        <height>30px</height>
+        <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+        <onclick>RejectButtonClick</onclick>
+        <tooltip>TT_REJECTTRADE</tooltip>
+        <anchor>Middle</anchor>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>0,0,0</fontcolour>
+          <fontsize>14px</fontsize>
+          <width>100px</width>
+          <height>30px</height>
+          <bold>true</bold>
+          <text>TRADEREJECTTEXT</text>
+          <textanchor>Middle</textanchor>
+        </control>  
+      </control>
+      
+      <control type="button">
+        <name>CounterButton</name>
+        <width>100px</width>
+        <height>30px</height>
+        <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+        <onclick>CounterButtonClick</onclick>
+        <tooltip>TT_COUNTERTRADE</tooltip>
+        <anchor>Middle</anchor>
+        <offsetx>110px</offsetx>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>0,0,0</fontcolour>
+          <fontsize>14px</fontsize>
+          <width>100px</width>
+          <height>30px</height>
+          <bold>true</bold>
+          <text>TRADEMODIFYTEXT</text>
+          <textanchor>Middle</textanchor>
+        </control>  
+      </control>
+    </control>
+    
+    <control type="button">
+      <name>CloseButton</name>
+      <width>38px</width>
+      <height>38px</height>
+      <imgnormal>Data\Images\HUD\promptbox\x_normal.png</imgnormal>
+      <imghigh>Data\Images\HUD\promptbox\x_mouseover.png</imghigh>
+      <imgpress>Data\Images\HUD\promptbox\x_pressed.png</imgpress>
+      <onclick>CloseButtonClick</onclick>
+      <tooltip>TT_CLOSETRADE</tooltip>
+      <anchor>BottomMiddle</anchor>
+      <offsety>12px</offsety>
+    </control>
+  </control>
+</form>

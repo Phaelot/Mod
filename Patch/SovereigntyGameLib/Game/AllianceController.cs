@@ -237,6 +237,16 @@ namespace SovereigntyTK.Game
 			return new TickerMessage(gameText, TickerMessageType.Diplomacy, 10);
 		}
 
+		// When FilterForeignTreatyMessages is on (default), only announce treaties that involve the player.
+		private bool ShouldAnnounceTreatyTicker(WorkingRealm Realm1, WorkingRealm Realm2)
+		{
+			if (!this.Game.GameCore.Settings.GetBooleanSetting("FilterForeignTreatyMessages"))
+			{
+				return true;
+			}
+			return Realm1 == this.Game.PlayerRealm || Realm2 == this.Game.PlayerRealm;
+		}
+
 		public virtual bool CanSeverAlliance(WorkingRealm realm1, WorkingRealm realm2, bool Forcedsever)
 		{
 			return !realm1.Restrictions.IsPermAlly(realm2) && !realm2.Restrictions.IsPermAlly(realm1) && realm1.DiplomacyManager.GetRelation(realm2) == RelationStates.Alliance && (Forcedsever || realm1.DiplomacyManager.GetRelationTime(realm2) >= 5);
@@ -303,7 +313,10 @@ namespace SovereigntyTK.Game
 			{
 				this.Game.GameCore.FireEvent("AlliancesChanged", new object[0]);
 			}
-			this.Game.GameCore.FireEvent("TickerMessage", new object[] { this.BuildTickerMessage("NEW_TREATY", Realm1, Realm2, this.GetTreatyName(relationStates)) });
+			if (ShouldAnnounceTreatyTicker(Realm1, Realm2))
+			{
+				this.Game.GameCore.FireEvent("TickerMessage", new object[] { this.BuildTickerMessage("NEW_TREATY", Realm1, Realm2, this.GetTreatyName(relationStates)) });
+			}
 			if ((Realm1 == this.Game.PlayerRealm || Realm2 == this.Game.PlayerRealm) && relationStates == RelationStates.Alliance)
 			{
 				this.Game.GameCore.FireEvent("PlayerAlliesChanged", new object[0]);
@@ -378,7 +391,10 @@ namespace SovereigntyTK.Game
 			{
 				this.Game.GameCore.FireEvent("AlliancesChanged", new object[0]);
 			}
-			this.Game.GameCore.FireEvent("TickerMessage", new object[] { this.BuildTickerMessage("END_TREATY", Realm1, Realm2, this.GetTreatyName(relation)) });
+			if (ShouldAnnounceTreatyTicker(Realm1, Realm2))
+			{
+				this.Game.GameCore.FireEvent("TickerMessage", new object[] { this.BuildTickerMessage("END_TREATY", Realm1, Realm2, this.GetTreatyName(relation)) });
+			}
 			if (Realm2 == this.Game.PlayerRealm)
 			{
 				GameText treatyName = this.GetTreatyName(relation);

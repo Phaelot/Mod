@@ -62,6 +62,12 @@ namespace SovereigntyTK.Game.Battle
 			list2 = list2.Where((WorkingUnit x) => x.Class == UnitClasses.Archer && x.BattleData.CanFight && x.RangedAttack.GetValue(Attacker) > 0).ToList<WorkingUnit>();
 			foreach (WorkingUnit workingUnit in list2)
 			{
+				// Match TacticalActionManager: engaged Archers cannot Support Fire.
+				if (workingUnit.HasStatus("ClassAbilitiesBlocked", new object[0])
+					|| Battle.Map.GetAdjacentEnemies(workingUnit.BattleData.BattleLocation, workingUnit.OwnerRealmID).Count > 0)
+				{
+					continue;
+				}
 				UnitActionData unitActions = Battle.GetUnitActions(workingUnit);
 				if (unitActions.TilesinRange.Contains(point))
 				{
@@ -69,10 +75,24 @@ namespace SovereigntyTK.Game.Battle
 					CombatResults combatResults2 = CombatManager.PerformCombat(workingUnit, Attacker, CombatType.MaxDamage, true, false, true);
 					if (combatResults2.DefenderCasualties > 0)
 					{
-						this.AttackerResult.MaxSupportCasualties += combatResults.DefenderCasualties;
-						this.AttackerResult.MaxSupportCasualties += combatResults.DefenderCasualties;
+						this.AttackerResult.MinSupportCasualties += combatResults.DefenderCasualties;
+						this.AttackerResult.MaxSupportCasualties += combatResults2.DefenderCasualties;
 						this.FireSupportUnits.Add(workingUnit);
 					}
+				}
+			}
+			// Counter Fire preview — same gates as TacticalActionManager (unengaged Archer only).
+			if (Defender.Class == UnitClasses.Archer && Defender.BattleData.CanFight && Defender.RangedAttack.GetValue(Attacker) > 0
+				&& !Defender.HasStatus("ClassAbilitiesBlocked", new object[0])
+				&& Battle.Map.GetAdjacentEnemies(Defender.BattleData.BattleLocation, Defender.OwnerRealmID).Count == 0)
+			{
+				UnitActionData counterActions = Battle.GetUnitActions(Defender);
+				if (counterActions.TilesinRange.Contains(point))
+				{
+					CombatResults counterMin = CombatManager.PerformCombat(Defender, Attacker, CombatType.MinDamage, true, false, true);
+					CombatResults counterMax = CombatManager.PerformCombat(Defender, Attacker, CombatType.MaxDamage, true, false, true);
+					this.AttackerResult.MinCasualties += counterMin.DefenderCasualties;
+					this.AttackerResult.MaxCasualties += counterMax.DefenderCasualties;
 				}
 			}
 			if (Attacker.Class == UnitClasses.Siege && !Defender.HasAnyNamedFlag("Shatter"))
@@ -115,8 +135,8 @@ namespace SovereigntyTK.Game.Battle
 			this.DefenderResult.StatusEffects.AddRange(combatStatusEffectsOnSelf2);
 			CombatResults combatResults3 = CombatManager.PerformCombat(Attacker, Defender, CombatType.MinDamage, ActionType == CombatAction.RangedAttack, flag, false);
 			CombatResults combatResults4 = CombatManager.PerformCombat(Attacker, Defender, CombatType.MaxDamage, ActionType == CombatAction.RangedAttack, flag, false);
-			this.AttackerResult.MinCasualties = combatResults3.AttackerCasualties;
-			this.AttackerResult.MaxCasualties = combatResults4.AttackerCasualties;
+			this.AttackerResult.MinCasualties += combatResults3.AttackerCasualties;
+			this.AttackerResult.MaxCasualties += combatResults4.AttackerCasualties;
 			this.DefenderResult.MinCasualties = combatResults3.DefenderCasualties;
 			this.DefenderResult.MaxCasualties = combatResults4.DefenderCasualties;
 			if (unitFlag != null)

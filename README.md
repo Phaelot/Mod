@@ -5,6 +5,10 @@ Compiled patch can be downloaded from releases tab or you can compile library fr
 
 Original decompiled game library code source is in "DecompiledSource" folder.
 
+Game Data files changed by this fork (UI scripts, XML, text and images) are in the "GameData" folder, which mirrors the game folder. Copy its contents into the game folder, overwriting existing files.
+
+Always install the GameData files and SovereigntyGameLib.dll from the same version. The UI scripts rely on settings and code that only exist in the matching DLL, so mixing an older DLL with newer GameData (or the other way round) can break the game or crash it on load.
+
 ====================================================
 
 Bug Fixes
@@ -15,6 +19,17 @@ Bug Fixes
 
 3. Fixed an AI unit movement bug that led to stalled armies in enemy provinces without an ongoing siege.
 
+4. Fixed a crash on return to main menu.
+
+5. Fixed a crash when AI uses hero powers.
+
+6. Fixed archer units retaliating when they should not.
+
+7. Fixed Riesental campaign crashes caused by mismatched province name lookups (apostrophe / missing provinces).
+
+8. Dunmar campaign: null-safe LandNode checks on campaign start (avoids NREs when transferring Vessoi stacks).
+
+9. Dunmar campaign: the Cor Vilaad / Dragonhold diplomatic choice now also triggers from full tactical battles, not only autobattles.
 
 Strategy Map
 
@@ -43,3 +58,47 @@ Battles and AI
 
 6. Commanders have names now. Commander cards show the number of battles won.
 
+
+Interface
+
+1. The province hover card shows the province's buildings and free building slots, and has fixed Revolt, Income, Research and Terrain lines above the description.
+
+2. Income and Research have breakdown tooltips: economy level, buildings, spells and distance to the capital for income, and the base value plus each building or spell for research.
+
+3. Income breakdowns show how far the province is from the capital, e.g. "Distance to Capitol (4): -158", using the same calculation as the actual income.
+
+4. Revolt chance shows the current value and a "base" without the garrison, so you can tell if it is safe to move the army.
+
+5. Terrain has a short flavour tooltip describing the ground and what to expect in battle. Hovering the province name or flag shows the current owner and rightful owner(s). Sea zones use a sea flag instead of an empty slot.
+
+6. Province buildings are listed by tier (then name) on the hover card and economy card.
+
+7. The message log no longer lists treaties between AI realms. Battle reports are shown in white, other messages in gold. A separator and "Turn N starts" mark the beginning of each of your turns.
+
+8. Foreign Affairs has a large home-realm flag in the top bar for quickly returning to your own diplomacy view.
+
+9. The plague map button has its own icon, minimap tab and tooltip.
+
+10. Unit icons in the army panel show promotion medals and a badge for Garrison units.
+
+11. Tactical battle tiles always show health and morale bars, not only when damaged.
+
+12. The top-bar date always uses English month names, independent of the OS language.
+
+13. Added icon for unit upkeep to unit cards.
+
+14. Reworked the diplomacy / relations screen layout and navigation.
+
+15. Unit cards: transparency fixes, layout tweaks, and updated unit art for several units (including Riesental and footmen).
+
+16. Added a setting to hide / enable selected message-log event types.
+
+17. Battle map: enemy range preview and a more visible zone-of-control marker.
+
+Notes
+
+1. Saves may break after GameData province/map changes. Prefer starting a new campaign after such updates.
+
+2. Campaign script overrides live under GameData/Data/Scripts/Campaigns (currently Riesental and Dunmar). Copy GameData into the game folder to apply them.
+
+3. Balance change (under testing): an Archer with an enemy adjacent to it can no longer use Support Fire or Counter Fire. In vanilla this only blocked its own ranged attacks. Because a melee attacker often ends its move next to a supporting Archer too, melee attacks now trigger Support Fire less often than before.

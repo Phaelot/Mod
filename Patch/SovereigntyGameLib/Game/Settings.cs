@@ -57,6 +57,8 @@ namespace SovereigntyTK.Game
 			AddSetting(AudioSettings, new NumericSetting("SoundVolume", "SETTING_SOUNDVOL", "SETTING_SOUNDVOL_TT", 100, 0, 100));
 			AddSetting(AudioSettings, new NumericSetting("MusicVolume", "SETTING_MUSICVOL", "SETTING_MUSICVOL_TT", 30, 0, 100));
 			AddSetting(GameplaySettings, new BooleanSetting("TipsEnabled", "SETTING_TIPSENABLED", "SETTING_TIPSENABLED_TT", DefaultValue: true));
+			AddSetting(GameplaySettings, new BooleanSetting("FilterForeignTreatyMessages", "SETTING_FILTERFOREIGNTREATIES", "SETTING_FILTERFOREIGNTREATIES_TT", DefaultValue: true));
+			AddSetting(GameplaySettings, new BooleanSetting("FilterForeignBattleMessages", "SETTING_FILTERFOREIGNBATTLES", "SETTING_FILTERFOREIGNBATTLES_TT", DefaultValue: false));
 			AddSetting(GameplaySettings, new BooleanSetting("ViewAllyBattles", "SETTING_ALLYBATTLE", "SETTING_ALLYBATTLE_TT", DefaultValue: false));
 			AddSetting(GameplaySettings, new BooleanSetting("ViewEnemyBattles", "SETTING_ENEMYBATTLE", "SETTING_ENEMYBATTLE_TT", DefaultValue: false));
 			AddSetting(GameplaySettings, new BooleanSetting("ViewRebelBattles", "SETTING_REBELBATTLE", "SETTING_REBELBATTLE_TT", DefaultValue: false));

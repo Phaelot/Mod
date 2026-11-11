@@ -470,9 +470,11 @@ namespace SovereigntyTK.UI.Map
 			{
 				if (ValidMoves.ContainsKey(allTile))
 				{
-					if (DisengageTiles.Contains(allTile))
+					bool disengage = DisengageTiles.Contains(allTile);
+					if (disengage)
 					{
-						Tiles[allTile].SetOverlayColour(Color.FromArgb(50, 220, 80, 60));
+						// Stronger red so opportunity-attack moves are obvious
+						Tiles[allTile].SetOverlayColour(Color.FromArgb(110, 220, 40, 40));
 					}
 					else
 					{
@@ -500,7 +502,7 @@ namespace SovereigntyTK.UI.Map
 					}
 					if (num > 0 && num < 63)
 					{
-						Tiles[allTile].SetOverlayBorder(num, Color.FromArgb(85, 170, 255));
+						Tiles[allTile].SetOverlayBorder(num, disengage ? Color.FromArgb(220, 50, 40) : Color.FromArgb(85, 170, 255));
 					}
 					else
 					{
@@ -1108,7 +1110,14 @@ namespace SovereigntyTK.UI.Map
 				list.Add(new Vector3(scaledTileCoords.X, 0f, scaledTileCoords.Y));
 			}
 			MovementArrow = new MapArrow(list, Game.GameCore, Game.GameCore.Data.CombatMap.TileSizeX * 0.1f, Game.GameCore.Data.CombatMap.TileSizeX * 0.3f);
-			MovementArrow.SetGreen();
+			if (DisengageTiles.Contains(EndTile))
+			{
+				MovementArrow.SetRed();
+			}
+			else
+			{
+				MovementArrow.SetGreen();
+			}
 		}
 
 		public void ShowActionArrow(Point StartTile, Point EndTile, bool FriendlyAction, bool UsePathing, UnitActionData SelectedUnitActions)
@@ -1154,8 +1163,12 @@ namespace SovereigntyTK.UI.Map
 
 		public List<WorkingUnit> GetAdjacentAllies(WorkingUnit Unit)
 		{
-			List<Point> adjacentTiles = Game.GameCore.Data.CombatMap.GetAdjacentTiles(Unit.BattleData.BattleX, Unit.BattleData.BattleY);
 			List<WorkingUnit> list = new List<WorkingUnit>();
+			if (Unit == null || Unit.BattleData == null)
+			{
+				return list;
+			}
+			List<Point> adjacentTiles = Game.GameCore.Data.CombatMap.GetAdjacentTiles(Unit.BattleData.BattleX, Unit.BattleData.BattleY);
 			foreach (Point item in adjacentTiles)
 			{
 				if (TileInsideBounds(item) && Tiles[item].UnitID != -1 && Tiles[item].Unit.OwnerRealmID == Unit.OwnerRealmID)

@@ -36,14 +36,16 @@ namespace SovereigntyTK.Game.ActiveGameData
 				{
 					return;
 				}
-				if (this.m_OwnerID > 0 && this.Game != null)
+				WorkingRealm oldRealm;
+				if (this.m_OwnerID > 0 && this.Game != null && this.Game.AllRealms.TryGetValue(this.m_OwnerID, out oldRealm))
 				{
-					this.Game.AllRealms[this.m_OwnerID].StacksChanged();
+					oldRealm.StacksChanged();
 				}
 				this.m_OwnerID = value;
-				if (this.m_OwnerID > 0 && this.Game != null)
+				WorkingRealm newRealm;
+				if (this.m_OwnerID > 0 && this.Game != null && this.Game.AllRealms.TryGetValue(this.m_OwnerID, out newRealm))
 				{
-					this.Game.AllRealms[this.m_OwnerID].StacksChanged();
+					newRealm.StacksChanged();
 				}
 			}
 		}

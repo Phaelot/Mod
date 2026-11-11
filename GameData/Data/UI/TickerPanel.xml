@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<form name="MainForm">
+  <fullscreen>true</fullscreen>
+  <scriptfile>SovereigntyTK.UI.TickerPanel</scriptfile>
+  <onload>FormLoaded</onload>
+  <anchor>TopMiddle</anchor>
+  <offsety>30px</offsety>
+  <width>560px</width>
+  <height>30px</height>
+  <name>TickerPanel</name>
+
+  <control type="image">
+    <width>100%</width>
+    <height>100%</height>
+    <imagefile>Data\Images\HUD\MainHUDNew\tickerbar.png</imagefile>
+  </control>
+
+  <control type="text">
+    <name>TickerText</name>
+    <width>100%</width>
+    <height>100%</height>
+    <fontname>Trebuchet MS</fontname>
+    <fontsize>12px</fontsize>
+    <fontcolour>255,238,161</fontcolour>
+    <bold>true</bold>
+    <textanchor>TopMiddle</textanchor>
+  </control>
+
+  <control type="button">
+    <name>ToggleButton</name>
+    <width>30px</width>
+    <height>30px</height>
+    <anchor>TopRight</anchor>
+    <imgnormal>Data\Images\HUD\Economy\arrow_down_normal.png</imgnormal>
+    <imghigh>Data\Images\HUD\Economy\arrow_down_mouseover.png</imghigh>
+    <imgpress>Data\Images\HUD\Economy\arrow_down_pressed.png</imgpress>
+    <onclick>TickerToggleClick</onclick>
+    <forcemouse>true</forcemouse>
+  </control>
+</form>

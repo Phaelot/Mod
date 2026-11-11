@@ -733,6 +733,8 @@ namespace SovereigntyTK.Game.ActiveGameData
 			{
 				this.RemoveFlag(unitFlag);
 			}
+			// Saves from before Shield Wall got TurnCount = 1 can carry permanent (-1) copies.
+			this.RemoveNamedFlags("Shield Wall", 0);
 			if (this.BattleData == null)
 			{
 				return;

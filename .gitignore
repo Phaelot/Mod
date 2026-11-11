@@ -1,0 +1,16 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs (do not commit - rebuild with MSBuild Release|x86)
+**/bin/
+**/obj/
+*.pdb
+*.cache
+
+# Local one-off research / scratch scripts
+_research_*.py
+tools/_research/

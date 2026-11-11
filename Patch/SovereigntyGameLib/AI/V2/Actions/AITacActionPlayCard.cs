@@ -17,16 +17,46 @@ namespace SovereigntyTK.AI.V2.Actions
 
 		private void HandleCardShown(string EventName, params object[] Args)
 		{
-			this.Card.CastEffect(this.CardTargets);
-			GameText gameText = GameText.CreateLocalised("FORMAT_BATTLELOG_CARD", new object[0]);
-			gameText.AddChildText(GameText.CreateLocalised(this.AI.Realm.DisplayName, new object[0]));
-			gameText.AddChildText(GameText.CreateLocalised(this.Card.DisplayName, new object[0]));
-			this.Game.GameCore.FireEvent("BattleLogEvent", new object[] { gameText });
-			this.AI.Realm.BattleData.UsedCards.Add(this.Card);
-			this.AI.Realm.BattleData.ActiveCards.Remove(this.Card);
-			this.AI.Realm.BattleData.CardPlayed = true;
-			this.Battle.UpdateShieldWallStatus();
-			this.State = AiActionStates.Finished;
+			try
+			{
+				if (this.Card != null)
+				{
+					try
+					{
+						this.Card.CastEffect(this.CardTargets);
+					}
+					catch (NullReferenceException ex)
+					{
+						// Stale tile/unit between AI target pick and acknowledgement; the card is still consumed.
+						if (this.AI != null)
+						{
+							this.AI.Log("Card " + this.Card.Name + " failed to cast: " + ex.Message + "\n" + ex.StackTrace);
+						}
+					}
+				}
+
+				// CastEffect can end the battle (last unit killed/removed). Realm.BattleData
+				// and unit BattleData may already be cleared — finish safely.
+				if (this.AI != null && this.AI.Realm != null && this.AI.Realm.BattleData != null && this.Card != null)
+				{
+					GameText gameText = GameText.CreateLocalised("FORMAT_BATTLELOG_CARD", new object[0]);
+					gameText.AddChildText(GameText.CreateLocalised(this.AI.Realm.DisplayName, new object[0]));
+					gameText.AddChildText(GameText.CreateLocalised(this.Card.DisplayName, new object[0]));
+					this.Game.GameCore.FireEvent("BattleLogEvent", new object[] { gameText });
+					this.AI.Realm.BattleData.UsedCards.Add(this.Card);
+					this.AI.Realm.BattleData.ActiveCards.Remove(this.Card);
+					this.AI.Realm.BattleData.CardPlayed = true;
+				}
+
+				if (this.Battle != null && !this.Battle.BattleEnded)
+				{
+					this.Battle.UpdateShieldWallStatus();
+				}
+			}
+			finally
+			{
+				this.State = AiActionStates.Finished;
+			}
 		}
 
 		public override void Execute()

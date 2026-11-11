@@ -564,6 +564,9 @@ namespace SovereigntyTK.AI.V2
 			list.Add(new Tuple<string, int>("Other wars:", GetPeaceEnemiesValue()));
 			list.Add(new Tuple<string, int>("Expecting to win:", (int)GetPeaceStrategicValue(Enemy)));
 			list.Add(new Tuple<string, int>("Disposition:", (int)(AI.Realm.DiplomacyManager.GetDisposition(Enemy) / 5f)));
+			list.Add(new Tuple<string, int>("Warmonger:", (int)((float)(-GetTrait("Warmonger")) * 1.5f)));
+			list.Add(new Tuple<string, int>("Militarist:", (int)((float)(-GetTrait("Militarist")) * 0.5f)));
+			list.Add(new Tuple<string, int>("Diplomat:", (int)((float)GetTrait("Diplomat") * 0.5f)));
 			return list;
 		}
 

@@ -925,17 +925,20 @@ namespace SovereigntyTK.Game
 				RemoveProvince(item5);
 			}
 			AllProvinces.Clear();
-			foreach (WorkingRealm item6 in AllRealms.Values.ToList())
-			{
-				item6.Dispose();
-			}
-			AllRealms.Clear();
+			// Destroy stacks before clearing realms: DestroyStack sets OwnerID=-1, which
+			// notifies AllRealms[oldOwner]. Clearing realms first caused KeyNotFoundException
+			// when returning to the main menu (EndGame -> Dispose).
 			foreach (WorkingStack item7 in AllStacks.Values.ToList())
 			{
 				DestroyStack(item7);
 				item7.Dispose();
 			}
 			AllStacks.Clear();
+			foreach (WorkingRealm item6 in AllRealms.Values.ToList())
+			{
+				item6.Dispose();
+			}
+			AllRealms.Clear();
 		}
 
 		private void RemoveProvince(WorkingProvince Province)

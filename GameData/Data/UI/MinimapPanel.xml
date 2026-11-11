@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form name="MinimapPanel">
+  <fullscreen>true</fullscreen>
+  <scriptfile>SovereigntyTK.UI.MinimapPanel</scriptfile>
+  <onload>FormLoaded</onload>
+
+  <control type="container">
+    <name>MinimapContainer</name>
+    <width>294px</width>
+    <height>216px</height>
+    <offsety>215px</offsety>
+    <offsetx>-1px</offsetx>
+    <anchor>MiddleRight</anchor>
+
+    <control type="image">
+      <name>MinimapImage</name>
+      <width>254px</width>
+      <height>195px</height>
+      <offsetx>33px</offsetx>
+      <offsety>12px</offsety>
+      <imagefile>Data\Images\Map\Minimap\map.png</imagefile>
+      <onclick>MinimapClicked</onclick>
+
+      <control type="image">
+        <name>ViewRect</name>
+        <imagefile>Data\Images\HUD\MainHUDNew\deploy_active.png</imagefile>
+        <ignoremouse>true</ignoremouse>
+      </control>
+    </control>
+
+    <control type="image">
+      <name>MinimapFrame</name>
+      <width>294px</width>
+      <height>216px</height>
+      <imagefile>Data\Images\Hud\MainHUDNew\mini_frame_plague.png</imagefile>
+      <ignoremouse>true</ignoremouse>
+
+      <control type="button">
+        <width>24px</width>
+        <height>24px</height>
+        <offsetx>7px</offsetx>
+        <offsety>11px</offsety>
+        <imgnormal>Data\Images\HUD\MainHUDNew\navigate_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\navigate_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\navigate_pressed.png</imgpress>
+        <onclick>MapModeDefaultClick</onclick>
+        <tooltip>TT_MODE_DEFAULT</tooltip>
+      </control>
+
+      <control type="button">
+        <width>24px</width>
+        <height>24px</height>
+        <offsetx>7px</offsetx>
+        <offsety>58px</offsety>
+        <imgnormal>Data\Images\HUD\MainHUDNew\politicalmap_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\politicalmap_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\politicalmap_pressed.png</imgpress>
+        <onclick>MapModePoliticalClick</onclick>
+        <tooltip>TT_MODE_POLITICS</tooltip>
+      </control>
+
+      <control type="button">
+        <width>24px</width>
+        <height>24px</height>
+        <offsetx>7px</offsetx>
+        <offsety>104px</offsety>
+        <imgnormal>Data\Images\HUD\MainHUDNew\diplomacy_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\diplomacy_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\diplomacy_pressed.png</imgpress>
+        <onclick>MapModeRelationsClick</onclick>
+        <tooltip>TT_MODE_RELATIONS</tooltip>
+      </control>
+
+      <control type="button">
+        <width>24px</width>
+        <height>24px</height>
+        <offsetx>7px</offsetx>
+        <offsety>150px</offsety>
+        <imgnormal>Data\Images\HUD\MainHUDNew\plague_normal.png</imgnormal>
+        <imghigh>Data\Images\HUD\MainHUDNew\plague_mouseover.png</imghigh>
+        <imgpress>Data\Images\HUD\MainHUDNew\plague_pressed.png</imgpress>
+        <onclick>MapModePlagueClick</onclick>
+        <tooltip>TT_MODE_PLAGUE</tooltip>
+      </control>
+    </control>
+  </control>
+</form>

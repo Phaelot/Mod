@@ -131,22 +131,16 @@ namespace SovereigntyTK.UI
 				rectangle2 = new Rectangle(0, 0, 180, 188);
 				graphics.DrawImage(UnitBattleSprite.Highlight, rectangle2, rectangle, GraphicsUnit.Pixel);
 			}
-			if (this.Unit.Health < 100)
-			{
-				float num = 1.68f * (float)this.Unit.Health;
-				rectangle2 = new Rectangle(7, 167, (int)num, 10);
-				graphics.DrawImage(UnitBattleSprite.BarOutline, new Rectangle(5, 165, 170, 14));
-				graphics.FillRectangle(Brushes.Red, rectangle2);
-			}
-			if (this.Unit.Morale < 100)
-			{
-				float num2 = 1.68f * (float)this.Unit.Morale;
-				rectangle2 = new Rectangle(7, 152, (int)num2, 10);
-				graphics.DrawImage(UnitBattleSprite.BarOutline, new Rectangle(5, 150, 170, 14));
-				Brush brush = new SolidBrush(Color.FromArgb(233, 212, 149));
-				graphics.FillRectangle(brush, rectangle2);
-				brush.Dispose();
-			}
+			float num = 1.68f * (float)this.Unit.Health;
+			rectangle2 = new Rectangle(7, 167, (int)num, 10);
+			graphics.DrawImage(UnitBattleSprite.BarOutline, new Rectangle(5, 165, 170, 14));
+			graphics.FillRectangle(Brushes.Red, rectangle2);
+			float num2 = 1.68f * (float)this.Unit.Morale;
+			rectangle2 = new Rectangle(7, 152, (int)num2, 10);
+			graphics.DrawImage(UnitBattleSprite.BarOutline, new Rectangle(5, 150, 170, 14));
+			Brush brush = new SolidBrush(Color.FromArgb(233, 212, 149));
+			graphics.FillRectangle(brush, rectangle2);
+			brush.Dispose();
 			if (this.Unit.BattleData != null && this.Unit.BattleData.Battle != null && !this.Unit.BattleData.Battle.DeployPhase)
 			{
 				if (!this.Unit.BattleData.CanFight)

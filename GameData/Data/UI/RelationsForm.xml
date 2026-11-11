@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<form name="RelationsForm">
+  <fullscreen>true</fullscreen>
+  <scriptfile>SovereigntyTK.UI.RelationsForm</scriptfile>
+  <onload>FormLoaded</onload>
+  <name>RelationsForm</name>
+  <visible>false</visible>
+    
+  <control type="image">
+    <name>PurchaseBG</name>
+    <height>100</height>
+    <width>178</width>
+    <forcemouse>true</forcemouse>
+    <anchor>Middle</anchor>
+  </control>
+
+  <control type="container">
+    <name>MainAreaContainer</name>
+    <width>95%</width>
+    <height>85%</height>
+    <offsety>10%</offsety>
+    <anchor>TopMiddle</anchor>
+
+    <control type="container">
+      <name>DiplomacyContainer</name>
+      <height>55%</height>
+      <width>50%</width>
+      <anchor>TopLeft</anchor>
+    
+      <control type="image">
+        <name>BGImageDiplomacy</name>
+        <height>400px</height>
+        <width>500px</width>
+        <anchor>TopMiddle</anchor>
+        <offsety>10px</offsety>
+        <imagefile>Data\Images\Hud\Purchase\unitwindow.png</imagefile>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>18px</fontsize>
+          <width>500px</width>
+          <height>50px</height>
+          <bold>true</bold>
+          <text>DIPLOMACYTEXT</text>
+          <textanchor>Middle</textanchor>
+        </control>
+
+        <control type="image">
+          <name>DiploBG1</name>
+          <width>220px</width>
+          <height>220px</height>
+          <offsetx>25px</offsetx>
+          <offsety>40px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>
+        
+        <control type="image">
+          <name>DiploBG2</name>
+          <width>220px</width>
+          <height>340px</height>
+          <offsetx>25px</offsetx>
+          <offsety>40px</offsety>
+          <anchor>TopRight</anchor>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        
+          <control type="text">
+            <name>RelationHeader</name>
+            <fontname>Trebuchet MS</fontname>
+            <fontcolour>255,238,161</fontcolour>
+            <fontsize>14px</fontsize>
+            <width>220px</width>
+            <height>30px</height>
+            <bold>true</bold>
+            <text>RELATIONSTITLETEXT</text>
+            <offsetx>2px</offsetx>
+            <offsety>2px</offsety>
+          </control>
+            
+          <control type="list" itemtype="SovereigntyTK.Game.ActiveGameData.WorkingRealm">
+            <name>RelationList</name>
+            <fontname>Trebuchet MS</fontname>
+            <fontcolour>255,238,161</fontcolour>
+            <itemcount>20</itemcount>
+            <width>220px</width>
+            <height>310px</height>
+            <offsety>30px</offsety>
+            <showhighlight>true</showhighlight>
+            <onitemclicked>RelationItemClicked</onitemclicked>
+          </control>
+        </control>
+        
+        <control type="image">
+          <name>DiploBG3</name>
+          <width>220px</width>
+          <height>110px</height>
+          <offsetx>25px</offsetx>
+          <offsety>270px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        
+          <control type="text">
+            <name>RelationStatusText</name>
+            <fontname>Trebuchet MS</fontname>
+            <fontcolour>255,238,161</fontcolour>
+            <fontsize>14px</fontsize>
+            <width>220px</width>
+            <height>50px</height>
+            <bold>true</bold>
+            <textanchor>Middle</textanchor>
+          </control>  
+      
+          <control type="button">
+            <name>TreatyBreakButton</name>
+            <width>90px</width>
+            <height>45px</height>
+            <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+            <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+            <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+            <onclick>TreatyBreakClick</onclick>
+            <anchor>BottomMiddle</anchor>
+            <offsetx>-50px</offsetx>
+            <offsety>15px</offsety>
+            
+            <control type="text">
+              <name>TreatyBreakText</name>
+              <fontname>Trebuchet MS</fontname>
+              <fontcolour>0,0,0</fontcolour>
+              <fontsize>10px</fontsize>
+              <width>90px</width>
+              <height>45px</height>
+              <bold>true</bold>
+              <textanchor>Middle</textanchor>
+            </control>  
+          </control>
+          
+          <control type="button">
+            <name>TreatyOfferButton</name>
+            <width>90px</width>
+            <height>45px</height>
+            <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+            <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+            <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+            <onclick>TreatyOfferClick</onclick>
+            <anchor>BottomMiddle</anchor>
+            <offsetx>50px</offsetx>
+            <offsety>15px</offsety>
+            
+            <control type="text">
+              <name>TreatyOfferText</name>
+              <fontname>Trebuchet MS</fontname>
+              <fontcolour>0,0,0</fontcolour>
+              <fontsize>10px</fontsize>
+              <width>90px</width>
+              <height>45px</height>
+              <bold>true</bold>
+              <textanchor>Middle</textanchor>
+            </control>  
+          
+          </control>
+        
+        </control>
+      
+      </control>
+    </control>
+
+    <control type="container">
+      <name>TradeContainer</name>
+      <height>55%</height>
+      <width>50%</width>
+      <anchor>TopRight</anchor>
+    
+      <control type="image">
+        <name>BGImageTrade</name>
+        <height>400px</height>
+        <width>500px</width>
+        <anchor>TopMiddle</anchor>
+        <offsety>10px</offsety>
+        <imagefile>Data\Images\Hud\Purchase\unitwindow.png</imagefile>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>18px</fontsize>
+          <width>500px</width>
+          <height>50px</height>
+          <bold>true</bold>
+          <text>TRADETEXT</text>
+          <textanchor>Middle</textanchor>
+        </control>
+      
+        <control type="image">
+          <name>TradeBG1</name>
+          <width>150px</width>
+          <height>220px</height>
+          <offsetx>25px</offsetx>
+          <offsety>40px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>
+        
+        <control type="image">
+          <name>TradeBG2</name>
+          <width>290px</width>
+          <height>340px</height>
+          <offsetx>25px</offsetx>
+          <offsety>40px</offsety>
+          <anchor>TopRight</anchor>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>
+        
+        <control type="image">
+          <name>TradeBG3</name>
+          <width>150px</width>
+          <height>110px</height>
+          <offsetx>25px</offsetx>
+          <offsety>270px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        
+          <control type="text">
+            <name>TradeOfferSelfText</name>
+            <fontname>Trebuchet MS</fontname>
+            <fontcolour>255,238,161</fontcolour>
+            <fontsize>14px</fontsize>
+            <width>150px</width>
+            <height>110px</height>
+            <bold>true</bold>
+            <text>TRADE_STATUS_SELF</text>
+            <textanchor>Middle</textanchor>
+          </control>  
+            
+          <control type="button">
+            <name>TradeOfferButton</name>
+            <width>90px</width>
+            <height>45px</height>
+            <imgnormal>Data\Images\HUD\MainHUDNew\basicbutton_normal.png</imgnormal>
+            <imghigh>Data\Images\HUD\MainHUDNew\basicbutton_mouseover.png</imghigh>
+            <imgpress>Data\Images\HUD\MainHUDNew\basicbutton_pressed.png</imgpress>
+            <onclick>TradeOfferClick</onclick>
+            <anchor>Middle</anchor>
+            
+            <control type="text">
+              <name>TradeOfferText</name>
+              <fontname>Trebuchet MS</fontname>
+              <fontcolour>0,0,0</fontcolour>
+              <fontsize>10px</fontsize>
+              <width>90px</width>
+              <height>45px</height>
+              <bold>true</bold>
+              <text>TRADE_NEWOFFER</text>
+              <textanchor>Middle</textanchor>
+            </control>  
+          </control>  
+        </control>
+      
+      </control>
+
+    </control>
+
+    <control type="container">
+      <name>RealmInfoContainer</name>
+      <height>45%</height>
+      <width>50%</width>
+      <anchor>BottomLeft</anchor>
+
+      <control type="image">
+        <name>BGImageRealmInfo</name>
+        <height>340px</height>
+        <width>560px</width>
+        <anchor>Middle</anchor>
+        <imagefile>Data\Images\Hud\Purchase\unitwindow.png</imagefile>
+
+        <control type="text">
+          <name>RealmInfoTitle</name>
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>18px</fontsize>
+          <width>560px</width>
+          <height>32px</height>
+          <bold>true</bold>
+          <text>REALMINFO_TITLE</text>
+          <textanchor>Middle</textanchor>
+        </control>
+
+        <control type="text">
+          <name>AuxiliariesTitle</name>
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>14px</fontsize>
+          <width>250px</width>
+          <height>24px</height>
+          <offsetx>285px</offsetx>
+          <offsety>36px</offsety>
+          <bold>true</bold>
+          <text>REALMINFO_AUX_TITLE</text>
+          <textanchor>Left</textanchor>
+        </control>
+
+        <control type="text">
+          <name>AuxiliariesStatusText</name>
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>11px</fontsize>
+          <width>250px</width>
+          <height>36px</height>
+          <offsetx>285px</offsetx>
+          <offsety>292px</offsety>
+          <textanchor>TopLeft</textanchor>
+        </control>
+
+        <control type="text">
+          <name>RealmRelationsOursText</name>
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>12px</fontsize>
+          <width>250px</width>
+          <height>20px</height>
+          <offsetx>285px</offsetx>
+          <offsety>250px</offsety>
+          <textanchor>Left</textanchor>
+          <forcemouse>true</forcemouse>
+        </control>
+
+        <control type="text">
+          <name>RealmRelationsTheirsText</name>
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>12px</fontsize>
+          <width>250px</width>
+          <height>20px</height>
+          <offsetx>285px</offsetx>
+          <offsety>278px</offsety>
+          <textanchor>Left</textanchor>
+          <forcemouse>true</forcemouse>
+        </control>
+      </control>
+    </control>
+
+    <control type="container">
+      <name>AgentsContainer</name>
+      <height>45%</height>
+      <width>50%</width>
+      <anchor>BottomRight</anchor>
+    
+      <control type="image">
+        <name>BGImageAgents</name>
+        <height>340px</height>
+        <width>500px</width>
+        <anchor>Middle</anchor>
+        <imagefile>Data\Images\Hud\Purchase\unitwindow.png</imagefile>
+      
+        <control type="text">
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <fontsize>18px</fontsize>
+          <width>500px</width>
+          <height>32px</height>
+          <bold>true</bold>
+          <text>COVERTTITLETEXT</text>
+          <textanchor>Middle</textanchor>
+        </control>
+      
+        <control type="image">
+          <name>AgentBG1</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>15px</offsetx>
+          <offsety>34px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>  
+        
+        <control type="image">
+          <name>AgentBG2</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>255px</offsetx>
+          <offsety>34px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>  
+            
+        <control type="image">
+          <name>AgentBG3</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>15px</offsetx>
+          <offsety>132px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>  
+            
+        <control type="image">
+          <name>AgentBG4</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>255px</offsetx>
+          <offsety>132px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>  
+        
+        <control type="image">
+          <name>AgentBG5</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>15px</offsetx>
+          <offsety>230px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>  
+        
+        <control type="image">
+          <name>AgentBG6</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>255px</offsetx>
+          <offsety>230px</offsety>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>  
+            
+        <control type="image">
+          <name>AgentBG7</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>15px</offsetx>
+          <offsety>230px</offsety>
+          <visible>false</visible>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>  
+            
+        <control type="image">
+          <name>AgentBG8</name>
+          <width>230px</width>
+          <height>90px</height>
+          <offsetx>255px</offsetx>
+          <offsety>230px</offsety>
+          <visible>false</visible>
+          <imagefile>Data\Images\Hud\bg.png</imagefile>
+        </control>
+
+      </control>
+    </control>
+  </control>
+  
+   <control type="image">
+    <name>TopBarBG</name>
+    <width>100%</width>
+    <height>10%</height>
+    <imagefile>Data\Images\Hud\Purchase\topshadow.png</imagefile>
+  
+    <control type="text">
+      <name>ForeignAffairsTitle</name>
+      <fontname>Trebuchet MS</fontname>
+      <fontcolour>255,238,161</fontcolour>
+      <fontsize>24px</fontsize>
+      <width>280px</width>
+      <height>50px</height>
+      <bold>true</bold>
+      <text>FORIEGN_TT</text>
+      <anchor>MiddleLeft</anchor>
+      <offsetx>95px</offsetx>
+    </control>
+  
+    <control type="image">
+      <name>AgentOverviewBG1</name>
+      <width>70px</width>
+      <height>70px</height>
+      <offsetx>10px</offsetx>
+      <anchor>MiddleRight</anchor>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+    </control>  
+     
+    <control type="image">
+      <name>AgentOverviewBG2</name>
+      <width>70px</width>
+      <height>70px</height>
+      <offsetx>90px</offsetx>
+      <anchor>MiddleRight</anchor>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+    </control>  
+     
+     <control type="image">
+      <name>AgentOverviewBG3</name>
+      <width>70px</width>
+      <height>70px</height>
+      <offsetx>170px</offsetx>
+      <anchor>MiddleRight</anchor>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+    </control>  
+     
+    <control type="image">
+      <name>AgentOverviewBG4</name>
+      <width>70px</width>
+      <height>70px</height>
+      <offsetx>250px</offsetx>
+      <anchor>MiddleRight</anchor>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+    </control>  
+        
+    <control type="image">
+      <name>AgentOverviewBG5</name>
+      <width>70px</width>
+      <height>70px</height>
+      <offsetx>330px</offsetx>
+      <anchor>MiddleRight</anchor>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+    </control>  
+        
+    <control type="image">
+      <name>AgentOverviewBG6</name>
+      <width>70px</width>
+      <height>70px</height>
+      <offsetx>410px</offsetx>
+      <anchor>MiddleRight</anchor>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+    </control>  
+        
+    <control type="image">
+      <name>AgentOverviewBG7</name>
+      <width>70px</width>
+      <height>70px</height>
+      <offsetx>490px</offsetx>
+      <anchor>MiddleRight</anchor>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+    </control>  
+       
+    <control type="image">
+      <name>PlayerRealmHomeContainer</name>
+      <width>70px</width>
+      <height>70px</height>
+      <forcemouse>true</forcemouse>
+      <onclick>PlayerRealmHomeClick</onclick>
+      <imagefile>Data\Images\Hud\bg.png</imagefile>
+      <control type="image">
+        <name>PlayerRealmHomeFlag</name>
+        <width>58px</width>
+        <height>50px</height>
+        <offsetx>6px</offsetx>
+        <offsety>10px</offsety>
+        <forcemouse>true</forcemouse>
+        <onclick>PlayerRealmHomeClick</onclick>
+      </control>
+      <anchor>MiddleLeft</anchor>
+      <offsetx>10px</offsetx>
+    </control>
+  
+  </control>
+
+  <control type="container">
+      <name>RealmSelectContainer</name>
+      <width>220px</width>
+      <height>620px</height>
+      <control type="image">
+        <name>TradeRealmDropdown</name>
+        <width>220px</width>
+        <height>28px</height>
+        <forcemouse>true</forcemouse>
+        <imagefile>Data\Images\HUD\diplomacy_panel_top.png</imagefile>
+        
+        <control type="image">
+          <name>TradeOfferRealmFlag</name>
+          <width>20px</width>
+          <height>20px</height>
+          <offsetx>8px</offsetx>
+          <offsety>4px</offsety>
+        </control>
+        
+        <control type="text">
+          <name>TradeOfferRealmText</name>
+          <width>180px</width>
+          <height>28px</height>
+          <fontname>Trebuchet MS</fontname>
+          <fontsize>16px</fontsize>
+          <fontcolour>255,238,161</fontcolour>
+          <textanchor>Left</textanchor>
+          <bold>true</bold>
+          <wordwrap>true</wordwrap>
+          <anchor>TopLeft</anchor>
+          <offsetx>34px</offsetx>
+        </control>
+        <control type="button">
+          <name>TradeOfferRealmButton</name>
+          <width>24px</width>
+          <height>24px</height>
+          <visible>false</visible>
+          <imgnormal>Data\Images\HUD\Economy\arrow_down_normal.png</imgnormal>
+          <imghigh>Data\Images\HUD\Economy\arrow_down_mouseover.png</imghigh>
+          <imgpress>Data\Images\HUD\Economy\arrow_down_pressed.png</imgpress>
+          <playsound>false</playsound>
+          <onclick>TradeOfferRealmsClick</onclick>
+          <anchor>TopRight</anchor>
+          <offsetx>5px</offsetx>
+          <offsety>3px</offsety>
+        </control>
+        <anchor>TopLeft</anchor>
+      </control>
+      <control type="image">
+        <name>TradeOfferRealmsBG</name>
+        <width>220px</width>
+        <height>580px</height>
+        <forcemouse>true</forcemouse>
+        <visible>true</visible>
+        <imagefile>Data\Images\HUD\bg_dark.png</imagefile>
+        <control type="list" itemtype="SovereigntyTK.Game.ActiveGameData.WorkingRealm">
+          <name>TradeOfferRealmList</name>
+          <fontname>Trebuchet MS</fontname>
+          <fontcolour>255,238,161</fontcolour>
+          <itemcount>26</itemcount>
+          <width>220px</width>
+          <height>580px</height>
+          <showhighlight>true</showhighlight>
+          <onitemclicked>TradeOfferRealmClicked</onitemclicked>
+          <anchor>TopLeft</anchor>
+        </control>
+        <anchor>TopLeft</anchor>
+        <offsetx>0px</offsetx>
+        <offsety>28px</offsety>
+      </control>
+      <anchor>TopLeft</anchor>
+      <offsetx>5px</offsetx>
+      <offsety>11%</offsety>
+    </control>
+
+  <control type="image">
+    <name>CovertTargetsBG</name>
+    <height>400px</height>
+    <width>200px</width>
+    <imagefile>Data\Images\Hud\bg.png</imagefile>
+    <visible>false</visible>
+    <control type="list" itemtype="SovereigntyTK.Game.ActiveGameData.WorkingRealm">
+      <name>CovertTargetsList</name>
+      <fontname>Trebuchet MS</fontname>
+      <fontcolour>255,238,161</fontcolour>
+      <itemcount>18</itemcount>
+      <height>400px</height>
+      <width>200px</width>
+      <showhighlight>true</showhighlight>
+      <onitemclicked>CovertTargetClicked</onitemclicked>
+      <anchor>TopLeft</anchor>
+    </control>
+    <anchor>TopLeft</anchor>
+  </control>
+
+  <control type="button">
+    <name>CloseButton</name>
+    <width>38px</width>
+    <height>38px</height>
+    <imgnormal>Data\Images\HUD\Purchase\close_normal.png</imgnormal>
+    <imghigh>Data\Images\HUD\Purchase\close_mouseover.png</imghigh>
+    <imgpress>Data\Images\HUD\Purchase\close_pressed.png</imgpress>
+    <onclick>CloseButtonClick</onclick>
+    <tooltip>TT_CLOSEDIPLOMACY</tooltip>
+    <anchor>BottomMiddle</anchor>
+    <offsety>5px</offsety>
+  </control>
+ 
+</form>

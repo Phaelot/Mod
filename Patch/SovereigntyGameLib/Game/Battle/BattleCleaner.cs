@@ -25,10 +25,13 @@ namespace SovereigntyTK.Game.Battle
 		{
 			BattleCleanupData battleCleanupData = new BattleCleanupData();
 			battleCleanupData.SetData(Battle);
-			this.Game.GameCore.FireEvent("TickerMessage", new object[]
+			if (ShouldAnnounceBattleTicker(battleCleanupData.Winner.Owner, battleCleanupData.Loser.Owner))
 			{
-				new TickerMessage(GameText.CreateFromLiteral(battleCleanupData.WinnerName + " defeats " + battleCleanupData.LoserName), TickerMessageType.Default, 1)
-			});
+				this.Game.GameCore.FireEvent("TickerMessage", new object[]
+				{
+					BuildBattleDefeatTicker(battleCleanupData.Winner.Owner, battleCleanupData.Loser.Owner)
+				});
+			}
 			Battle.DisposeDeadUnits();
 			Battle.RemoveFortification();
 			battleCleanupData.Winner.AwardHeroXP(10);
@@ -57,10 +60,13 @@ namespace SovereigntyTK.Game.Battle
 		{
 			BattleCleanupData battleCleanupData = new BattleCleanupData();
 			battleCleanupData.SetData(Battle);
-			this.Game.GameCore.FireEvent("TickerMessage", new object[]
+			if (ShouldAnnounceBattleTicker(battleCleanupData.Winner.Owner, battleCleanupData.Loser.Owner))
 			{
-				new TickerMessage(GameText.CreateFromLiteral(battleCleanupData.WinnerName + " defeats " + battleCleanupData.LoserName), TickerMessageType.Default, 1)
-			});
+				this.Game.GameCore.FireEvent("TickerMessage", new object[]
+				{
+					BuildBattleDefeatTicker(battleCleanupData.Winner.Owner, battleCleanupData.Loser.Owner)
+				});
+			}
 			battleCleanupData.Winner.AwardHeroXP(10);
 			this.AwardHeroBattleWin(battleCleanupData);
 			battleCleanupData.Loser.AwardHeroXP(1);
@@ -361,6 +367,26 @@ namespace SovereigntyTK.Game.Battle
 				return;
 			}
 			Province.OccupierRealm.AIPlayer.RelationsManager.ConsiderLiberation(Province);
+		}
+
+		// When FilterForeignBattleMessages is on, only announce battles that involve the player.
+		private bool ShouldAnnounceBattleTicker(WorkingRealm Realm1, WorkingRealm Realm2)
+		{
+			if (!this.Game.GameCore.Settings.GetBooleanSetting("FilterForeignBattleMessages"))
+			{
+				return true;
+			}
+			WorkingRealm Player = this.Game.PlayerRealm;
+			return Player != null && (Realm1 == Player || Realm2 == Player);
+		}
+
+		// Named/localised ticker text (like NEW_TREATY) so filters work in any language.
+		private static TickerMessage BuildBattleDefeatTicker(WorkingRealm Winner, WorkingRealm Loser)
+		{
+			GameText Text = GameText.CreateLocalised("BATTLE_DEFEATED", new object[0]);
+			Text.AddChildText(GameText.CreateLocalised(Winner.DisplayName, new object[0]));
+			Text.AddChildText(GameText.CreateLocalised(Loser.DisplayName, new object[0]));
+			return new TickerMessage(Text, TickerMessageType.Military, 1);
 		}
 
 		private AutoBattleController Battle;
